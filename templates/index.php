@@ -1,3 +1,3 @@
 <div class="welcome">
-    Приветствую <?=$name?> ! <?=$a?>
+     <?=$hello?> ! <?=$welcome?>
 </div>

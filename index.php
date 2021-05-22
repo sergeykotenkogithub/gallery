@@ -1,48 +1,29 @@
 <?php
 
-define('TEMPLATES_DIR', 'templates/');
-define('LAYOUT_DIR', 'layouts/main');
-
-$page ='index';
-if(isset($_GET['page'])) {
-    $page = $_GET['page'];
-}
-
-
-// На всех страницах какой-то параметр
-
-$params = [
-    'name' => 'Гость',
-    'a' => 'Тут',
-    'title' => 'Галерея',
+$menu = [
+    [
+        "title" => "Hello",
+        "href" => "/",
+    ],
+    [
+        "title" => "Gallery",
+        "href" => "/?page=gallery",
+    ],
 ];
 
+function getMenu($menu)
+{
+    $ul = "<ul class=\"menu__wrapper\">";
 
-
-function renderTemplate($page, $params = []) {
-    extract($params);
-
-    ob_start();
-    $filename = TEMPLATES_DIR . $page . ".php";
-    if(file_exists($filename)) {
-        include $filename;
+    foreach ($menu as $item) {
+        $ul .= "<li class=\"menu__link\"><a href=\"{$item['href']}\">{$item['title']}</a></li>";
     }
 
-    return ob_get_clean();
+    $ul .= "</ul>";
+    return $ul;
 }
 
-$menu = renderTemplate('menu');
-$welcome = renderTemplate('_welcome');
-
-
-//echo renderTemplate(LAYOUT_DIR, $menu, $welcome);
-
-
-
-
 // ................................................................
-
-//include 'main.php';
 
 // Вывод имён файлов в папке gallery_img/big/
 function getFile() {
@@ -148,20 +129,48 @@ if (isset($_FILES['myfile'])) {
 
 $message = $messageUpload[$_GET['page=gallery&message']];
 
-//include 'main.php';
+
+//ДВИЖОК
+
+
+define('TEMPLATES_DIR', 'templates/');
+define('LAYOUT_DIR', 'layouts/main');
+
+$page ='index';
+if(isset($_GET['page'])) {
+    $page = $_GET['page'];
+}
+
+
+// На всех страницах какой-то параметр
+
+$params = [
+//    'title' => 'Галерея'  // Тут передаётся на страницу, а как передать в layout? и разные сделать значение для каждой страницы
+    'list' => getMenu($menu),
+];
 
 
 
+function renderTemplate($page, $params = []) {
+    extract($params);
+
+    ob_start();
+    $filename = TEMPLATES_DIR . $page . ".php";
+    if(file_exists($filename)) {
+        include $filename;
+    }
+
+    return ob_get_clean();
+}
 
 switch ($page) {
     case 'index':
+        $params['hello'] = 'Hello,';
+        $params['welcome'] = 'Welcome !';
         break;
     case 'gallery':
-//        $params['messages'] = 'Привет'; // message это переменная которая передаётся на страницу, а "Привет" это то что передаётся
-//        $params['messa'] = 'asd1';
         $params['giveFile'] = getFile();
         $params['message'] = $messageUpload[$_GET['message']];
-//        $params['$giveFile']  = $giveFile;
         break;
 }
 
