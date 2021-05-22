@@ -1,3 +1,3 @@
 <div class="welcome">
-     <?=$hello?> ! <?=$welcome?>
+     <?=$hello?> <?=$welcome?>
 </div>

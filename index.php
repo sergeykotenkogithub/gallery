@@ -1,36 +1,10 @@
 <?php
 
-$menu = [
-    [
-        "title" => "Hello",
-        "href" => "/",
-    ],
-    [
-        "title" => "Gallery",
-        "href" => "/?page=gallery",
-    ],
-];
+include "config/config.php";
 
-function getMenu($menu)
-{
-    $ul = "<ul class=\"menu__wrapper\">";
-
-    foreach ($menu as $item) {
-        $ul .= "<li class=\"menu__link\"><a href=\"{$item['href']}\">{$item['title']}</a></li>";
-    }
-
-    $ul .= "</ul>";
-    return $ul;
-}
 
 // ................................................................
 
-// Вывод имён файлов в папке gallery_img/big/
-function getFile() {
-    $files = array_splice( scandir("gallery_img/big/"), 2);
-    return $files;
-}
-$giveFile = getFile();
 
 // .................................................................................
 
@@ -132,15 +106,10 @@ $message = $messageUpload[$_GET['page=gallery&message']];
 
 //ДВИЖОК
 
-
-define('TEMPLATES_DIR', 'templates/');
-define('LAYOUT_DIR', 'layouts/main');
-
 $page ='index';
 if(isset($_GET['page'])) {
     $page = $_GET['page'];
 }
-
 
 // На всех страницах какой-то параметр
 
@@ -149,20 +118,7 @@ $params = [
     'list' => getMenu($menu),
 ];
 
-
-
-function renderTemplate($page, $params = []) {
-    extract($params);
-
-    ob_start();
-    $filename = TEMPLATES_DIR . $page . ".php";
-    if(file_exists($filename)) {
-        include $filename;
-    }
-
-    return ob_get_clean();
-}
-
+//Переменные для страниц
 switch ($page) {
     case 'index':
         $params['hello'] = 'Hello,';
@@ -174,12 +130,4 @@ switch ($page) {
         break;
 }
 
-
 echo render($page, $params);
-
-function render ($page, $params = []) {
-    return renderTemplate(LAYOUT_DIR, [
-        'menu' => renderTemplate('menu', $params),
-        'content' => renderTemplate($page, $params)
-    ]);
-}
