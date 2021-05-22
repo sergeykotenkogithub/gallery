@@ -1,13 +1,4 @@
 <?php
-
-include "config/config.php";
-
-
-// ................................................................
-
-
-// .................................................................................
-
 $messageUpload = [
     'OK' => 'Файл успешно загружен',
     'ERROR' => 'Ошибка',
@@ -17,7 +8,6 @@ $messageUpload = [
     'NOTPHP' => 'Загрузка php-файлов запрещена!',
     'NOTIMG' => 'Можно загружать только jpg-файлы, неверное содержание файла, не изображение',
 ];
-
 
 // Загрузка файла
 
@@ -72,7 +62,7 @@ if (isset($_FILES['myfile'])) {
         die();
     }
 
-// .................................................................................
+    // .................................................................................
 
     // Делаю так чтобы название файла переимоновывался в число по порядку
 
@@ -93,7 +83,6 @@ if (isset($_FILES['myfile'])) {
 
     // Уменьшает размер картинки
 
-    include('classSimpleImage.php');
     $image = new SimpleImage();
     $image->load(UPLOADDIR . "$newName");
     $image->resize(150, 100);
@@ -102,32 +91,3 @@ if (isset($_FILES['myfile'])) {
 }
 
 $message = $messageUpload[$_GET['page=gallery&message']];
-
-
-//ДВИЖОК
-
-$page ='index';
-if(isset($_GET['page'])) {
-    $page = $_GET['page'];
-}
-
-// На всех страницах какой-то параметр
-
-$params = [
-//    'title' => 'Галерея'  // Тут передаётся на страницу, а как передать в layout? и разные сделать значение для каждой страницы
-    'list' => getMenu($menu),
-];
-
-//Переменные для страниц
-switch ($page) {
-    case 'index':
-        $params['hello'] = 'Hello,';
-        $params['welcome'] = 'Welcome !';
-        break;
-    case 'gallery':
-        $params['giveFile'] = getFile();
-        $params['message'] = $messageUpload[$_GET['message']];
-        break;
-}
-
-echo render($page, $params);
