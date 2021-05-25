@@ -27,11 +27,16 @@ switch ($page) {
         $params['title'] = 'Hello';
         break;
     case 'gallery':
-
         $params['images'] = getImages();
         $params['message'] = $messageUpload[$_GET['message']];
         $params['title'] = 'Gallery';
-
+        break;
+    case 'news':
+       $params['news'] = getNews();
+       break;
+    case 'newsone':
+        $id = (int)$_GET['id'];
+        $params['news'] = getOneNews($id);
         break;
 }
 

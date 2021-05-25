@@ -11,6 +11,10 @@ $menu = [
         "title" => "Gallery",
         "href" => "/?page=gallery",
     ],
+    [
+        "title" => "News",
+        "href" => "/?page=news",
+    ],
 ];
 
 function getMenu($menu)

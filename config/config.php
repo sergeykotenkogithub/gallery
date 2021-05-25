@@ -19,18 +19,19 @@ $messageUpload = [
     'NOTIMG' => 'Можно загружать только jpg-файлы, неверное содержание файла, не изображение',
 ];
 
+// DB config
+define('HOST', 'localhost:3307');
+define('USER', 'pakko');
+define('PASS', '123');
+define('DB', 'news');
+
+
 // Подключение модулей
 
+include ROOT . "/engine/db.php";
+include ROOT . "/engine/news.php";
 include ROOT . "/engine/menu.php";
 include ROOT . "/engine/function.php";
 include ROOT . "/engine/getFileImg.php";
 include ROOT . "/engine/classSimpleImage.php";
 include ROOT . "/engine/uploadFile.php";
-
-// ...........................
-
-//include "../engine/menu.php";
-//include "../engine/function.php";
-//include "../engine/getFileImg.php";
-//include "../engine/classSimpleImage.php";
-//include "../engine/uploadFile.php";
