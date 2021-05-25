@@ -15,6 +15,7 @@ function renderTemplate($page, $params = []) {
 function render ($page, $params = []) {
     return renderTemplate(LAYOUT_DIR, [
         'menu' => renderTemplate('menu', $params),
-        'content' => renderTemplate($page, $params)
+        'content' => renderTemplate($page, $params),
+        'title' => $params['title']  // Заголок который находится в main.php
     ]);
 }

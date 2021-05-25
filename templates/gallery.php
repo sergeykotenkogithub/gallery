@@ -19,7 +19,7 @@
     <div class="post_title"><h2>My Gallery</h2></div>
 
     <div class="gallery">
-        <?php foreach ($giveFile as $filename): ?>
+        <?php foreach ($images as $filename): ?>
         <a rel='gallery' class='photo' href='gallery_img/big/<?=$filename?>'>
             <img src='/gallery_img/small/<?=$filename?>' width='150' height='100'/>
             <?php endforeach;?>

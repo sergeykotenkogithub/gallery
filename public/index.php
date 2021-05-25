@@ -2,7 +2,7 @@
 
 // Подключение основного конфигурационого файла
 
-include "../config/config.php";
+include $_SERVER['DOCUMENT_ROOT'] .  "/../config/config.php";
 
 // .................................................................................
 
@@ -16,7 +16,6 @@ if(isset($_GET['page'])) {
 // $params для указания переменной на всех страницах
 
 $params = [
-//    'title' => 'Галерея'  // Тут передаётся на страницу, а как передать в layout? и разные сделать значение для каждой страницы
     'list' => getMenu($menu),
 ];
 
@@ -25,10 +24,14 @@ switch ($page) {
     case 'index':
         $params['hello'] = 'Hello,';
         $params['welcome'] = 'Welcome !';
+        $params['title'] = 'Hello';
         break;
     case 'gallery':
-        $params['giveFile'] = getFile();
+
+        $params['images'] = getImages();
         $params['message'] = $messageUpload[$_GET['message']];
+        $params['title'] = 'Gallery';
+
         break;
 }
 

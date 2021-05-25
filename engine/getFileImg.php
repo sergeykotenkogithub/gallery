@@ -1,8 +1,7 @@
 <?php
 
 // Вывод картинок gallery_img/big/
-function getFile() {
-    $files = array_splice( scandir("gallery_img/big/"), 2);
-    return $files;
+function getImages() {
+    return $files = array_splice( scandir(IMG_BIG), 2);
 }
-$giveFile = getFile();
+$getImages = getImages();
