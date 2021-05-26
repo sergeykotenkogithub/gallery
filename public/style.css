@@ -279,3 +279,18 @@ a {
 .news {
 	padding: 10px 0;
 }
+
+.news a {
+	border-bottom: 1px dashed white;
+}
+
+/* При наведение появляется корзина*/
+
+.del {
+	display: none;
+}
+
+.imgWrapper:hover .del {
+	display: block;
+}
+
