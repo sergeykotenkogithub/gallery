@@ -265,3 +265,17 @@ a {
 	width: 18px;
 	padding: 15px;
 }
+
+.newsWrapper {
+	width: 858px;
+	margin: 0 auto;
+	color: #CCC;
+	box-shadow: 0 0px 22px #ccc;
+	border-radius: 10px;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.news {
+	padding: 10px 0;
+}

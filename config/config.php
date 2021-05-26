@@ -29,10 +29,11 @@ define('DB', 'gallerybase');
 // Подключение модулей
 
 include ROOT . "/engine/db.php";
-//include ROOT . "/engine/news.php";
 include ROOT . "/engine/gallery.php";
 include ROOT . "/engine/menu.php";
 include ROOT . "/engine/function.php";
 include ROOT . "/engine/getFileImg.php";
 include ROOT . "/engine/classSimpleImage.php";
 include ROOT . "/engine/uploadFile.php";
+include ROOT . "/engine/delete.php";
+include ROOT . "/engine/news.php";

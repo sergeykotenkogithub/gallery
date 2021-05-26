@@ -1,11 +1,11 @@
+<div class="newsWrapper">
 
 <h2>Новости</h2>
 
-<?php var_dump($news); ?>
-
 <?php foreach ($news as $item):?>
-    <div>
-        <a href="/?page=newsone&id=<?=$item['id']?>"><b><?=$item['title']?></b> </a>
+    <div class="news">
+        <a href="/?page=newsone&id=<?=$item['id']?>"><b><?=$item['title']?></b></a>
     </div>
-<?endforeach;?>
+<?php endforeach;?>
 
+</div>

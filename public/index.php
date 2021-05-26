@@ -42,16 +42,10 @@ switch ($page) {
             deleteViews($id);
             // Удаление с компьютера
             $idHard = $_GET['name'];
-            $filepath = IMG_BIG . $idHard;
-            $filepath2 = IMG_SMALL . $idHard;
-            unlink($filepath);
-            unlink($filepath2);
-            //Вывод сообщения !!! Не выходит !!!
-            $message_del = "Изображение удалена";
-            header("Location: ?page=gallery&message_del={$message_del}");
-//            die();
+            deleteImg($idHard);
         }
-        $message_del = strip_tags($_GET['page=gallery&message_del']);
+        $message_del = strip_tags($_GET['message_del']);
+        $params['message_del'] =  strip_tags($_GET['message_del']);
 
         break;
     case 'galleryone':
@@ -66,12 +60,12 @@ switch ($page) {
         }
         break;
     case 'news':
-       $params['news'] = getNews();
+      $params['news'] = getNews();
        break;
-    case 'newsone':
-        $id = (int)$_GET['id'];
-        $params['news'] = getOneNews($id);
-        break;
+   case 'newsone':
+       $id = (int)$_GET['id'];
+       $params['news'] = getOneNews($id);
+       break;
 }
 
 echo render($page, $params, $layout);
