@@ -10,20 +10,14 @@
 </head>
 <body>
 
+<!-- Отображение картинки большой при нажатие -->
 <div class="picture">
-    <div class="views"><?=$gall['views']?></div>
+    <div class="views">
+        <img src="/img/eye.svg" alt="view">
+        <div><?=$gall['views']?></div>
+    </div>
     <img src='/gallery_img/big/<?=$gall['image']?>' width="800" height="600">
 </div>
 
 </body>
 </html>
-
-
-
-<!--<img src='/gallery_img/big/1.jpg'-->
-<!--     <img src="/gallery_img/big/01.jpg " width="800" height="600">-->
-
-<!--     <img src="../../public/gallery_img/big/01.jpg " width="800" height="600">-->
-<!--     <img src="../../public/gallery_img/big/02.jpg">-->
-<!--<img src='../../public/gallery_img/big/--><?//=$gallery['image']?><!--'-->
-<!--<img src='../../public/gallery_img/big/--><?//=$gallery['image']?><!--'-->

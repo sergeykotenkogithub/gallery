@@ -37,16 +37,14 @@ switch ($page) {
         $layout = 'galleryone';
         $id = (int)$_GET['id'];
         $params['gall'] = getOneGallery($id);
-//        $params['gall'] = 'sdsdsa';
-//        var_dump(getOneGallery($id));
         break;
-//    case 'news':
-//       $params['news'] = getNews();
-//       break;
-//    case 'newsone':
-//        $id = (int)$_GET['id'];
-//        $params['news'] = getOneNews($id);
-//        break;
+    case 'news':
+       $params['news'] = getNews();
+       break;
+    case 'newsone':
+        $id = (int)$_GET['id'];
+        $params['news'] = getOneNews($id);
+        break;
 }
 
 echo render($page, $params, $layout);

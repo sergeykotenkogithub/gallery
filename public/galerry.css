@@ -5,4 +5,15 @@
 .views {
     position: absolute;
     color: white;
+    display: flex;
+    align-items: center;
+}
+
+.views img {
+    margin: 0 10px;
+    width: 30px;
+}
+
+.views div {
+    font-size: 16px;
 }
