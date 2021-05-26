@@ -30,14 +30,19 @@ switch ($page) {
         $params['images'] = getImages();
         $params['message'] = $messageUpload[$_GET['message']];
         $params['title'] = 'Gallery';
+        $params['gallery'] = getGallery();
         break;
-    case 'news':
-       $params['news'] = getNews();
-       break;
-    case 'newsone':
+    case 'galleryone':
         $id = (int)$_GET['id'];
-        $params['news'] = getOneNews($id);
+        $params['gallery'] = getOneGallery($id);
         break;
+//    case 'news':
+//       $params['news'] = getNews();
+//       break;
+//    case 'newsone':
+//        $id = (int)$_GET['id'];
+//        $params['news'] = getOneNews($id);
+//        break;
 }
 
 echo render($page, $params);

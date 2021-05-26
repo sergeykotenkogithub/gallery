@@ -23,13 +23,14 @@ $messageUpload = [
 define('HOST', 'localhost:3307');
 define('USER', 'pakko');
 define('PASS', '123');
-define('DB', 'news');
+define('DB', 'gallerybase');
 
 
 // Подключение модулей
 
 include ROOT . "/engine/db.php";
-include ROOT . "/engine/news.php";
+//include ROOT . "/engine/news.php";
+include ROOT . "/engine/gallery.php";
 include ROOT . "/engine/menu.php";
 include ROOT . "/engine/function.php";
 include ROOT . "/engine/getFileImg.php";

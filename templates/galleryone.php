@@ -1,0 +1,1 @@
+<img src='/gallery_img/big/<?=$gallery['image']?>'
