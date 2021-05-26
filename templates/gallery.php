@@ -11,6 +11,7 @@
         </div>
     </form>
     <div class="colorForm"><?=$message?></div>
+    <div class="colorForm"><?=$message_del?></div>
     <div class="sort styleIcon"><img src="/img/sort.svg" alt=""><img src="/img/view.svg" alt=""></div>
     <div class="sortName styleIcon"><img src="/img/sortName.svg" alt=""></div>
 </div>
@@ -23,11 +24,11 @@
         <?php foreach ($gallery as $item): ?>
         <div class="imgWrapper">
             <a rel='gallery' class='photo' href="/?page=galleryone&id=<?=$item['id']?>">
-                <img class="imgBigDel" src='/gallery_img/small/<?=$item['image']?>' width='150' height='100'/>
+                <img class="imgBig" src='/gallery_img/small/<?=$item['image']?>' width='150' height='100'/>
             </a>
             <!--   Удаление картинки         -->
             <a class="del" href="?page=gallery&action=delete&id=<?=$item['id']?>&name=<?=$item['image']?>">
-                [X]
+                <img class="delete" src="/img/delete.svg" alt="delete">
             </a>
         </div>
         <?php endforeach;?>
@@ -39,9 +40,12 @@
         <?php foreach ($gallerySort as $item): ?>
             <div class="imgWrapper">
                 <a rel='gallery' class='photo' href="/?page=galleryone&id=<?=$item['id']?>">
-                    <img class="imgBigDel" src='/gallery_img/small/<?=$item['image']?>' width='150' height='100'/>
+                    <img class="imgBig" src='/gallery_img/small/<?=$item['image']?>' width='150' height='100'/>
                 </a>
-                <a class="del" href="?page=gallery&action=delete&id=<?=$item['id']?>">[X]</a>
+                <!--   Удаление картинки         -->
+                <a class="del" href="?page=gallery&action=delete&id=<?=$item['id']?>&name=<?=$item['image']?>">
+                    <img class="delete" src="/img/delete.svg" alt="delete">
+                </a>
             </div>
         <?php endforeach;?>
     </div>

@@ -33,6 +33,26 @@ switch ($page) {
         $params['title'] = 'Gallery';
         $params['gallery'] = getGallery(); // Через базу данных
         $params['gallerySort'] = getGallerySorting(); // Через базу данных
+
+        // Удаление и вывод сообщения
+        $message_del = "";
+        if ($_GET['action'] == 'delete') {
+            // Удаление с базы данных
+            $id = (int)$_GET['id'];
+            deleteViews($id);
+            // Удаление с компьютера
+            $idHard = $_GET['name'];
+            $filepath = IMG_BIG . $idHard;
+            $filepath2 = IMG_SMALL . $idHard;
+            unlink($filepath);
+            unlink($filepath2);
+            //Вывод сообщения !!! Не выходит !!!
+            $message_del = "Изображение удалена";
+            header("Location: ?page=gallery&message_del={$message_del}");
+//            die();
+        }
+        $message_del = strip_tags($_GET['page=gallery&message_del']);
+
         break;
     case 'galleryone':
         $layout = 'galleryone';
@@ -44,7 +64,6 @@ switch ($page) {
             $id = (int)$_GET['id'];
             changeViews($id);
         }
-
         break;
     case 'news':
        $params['news'] = getNews();
