@@ -9,6 +9,7 @@ include $_SERVER['DOCUMENT_ROOT'] .  "/../config/config.php";
 //ДВИЖОК
 
 $page ='index';
+$layout = 'main';
 if(isset($_GET['page'])) {
     $page = $_GET['page'];
 }
@@ -28,13 +29,16 @@ switch ($page) {
         break;
     case 'gallery':
         $params['images'] = getImages();
-        $params['message'] = $messageUpload[$_GET['message']];
+        $params['message'] = $messageUpload[$_GET['message']]; // Вывод сообщения
         $params['title'] = 'Gallery';
-        $params['gallery'] = getGallery();
+        $params['gallery'] = getGallery(); // Через базу данных
         break;
     case 'galleryone':
+        $layout = 'galleryone';
         $id = (int)$_GET['id'];
-        $params['gallery'] = getOneGallery($id);
+        $params['gall'] = getOneGallery($id);
+//        $params['gall'] = 'sdsdsa';
+//        var_dump(getOneGallery($id));
         break;
 //    case 'news':
 //       $params['news'] = getNews();
@@ -45,4 +49,4 @@ switch ($page) {
 //        break;
 }
 
-echo render($page, $params);
+echo render($page, $params, $layout);

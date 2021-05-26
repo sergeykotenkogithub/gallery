@@ -74,6 +74,8 @@ if (isset($_FILES['myfile'])) {
 
     // Уменьшает размер картинки
 
+//    pushOneGallery($newName);
+
     $image = new SimpleImage();
     $image->load(UPLOADDIR . "$newName");
     $image->resize(150, 100);

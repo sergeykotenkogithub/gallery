@@ -3,7 +3,7 @@
 // Пути файлов
 define('ROOT', dirname(__DIR__)); // К основной директории, не public
 define('TEMPLATES_DIR', ROOT . '/templates/'); // К модулям
-define('LAYOUT_DIR', 'layouts/main'); // К основным шаблонам
+define('LAYOUT_DIR', 'layouts/'); // К основным шаблонам
 define('IMG_BIG', $_SERVER['DOCUMENT_ROOT'] . '/gallery_img/big/'); // Большие картинки
 define('IMG_SMALL', $_SERVER['DOCUMENT_ROOT'] . '/gallery_img/small/'); // Маленькие картинки
 
