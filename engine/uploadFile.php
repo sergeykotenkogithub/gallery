@@ -6,6 +6,8 @@ if (isset($_FILES['myfile'])) {
 
 // Перемещение файла
 
+//        pushOneGallery($_FILES['myfile']['name']);
+
         $path = IMG_BIG . $_FILES['myfile']['name'];
         define("UPLOADDIR", IMG_BIG); // Куда
         define("UPLOADRESIZE", IMG_SMALL); // Resize
@@ -74,7 +76,7 @@ if (isset($_FILES['myfile'])) {
 
     // Уменьшает размер картинки
 
-//    pushOneGallery($newName);
+    pushOneGallery($newName);
 
     $image = new SimpleImage();
     $image->load(UPLOADDIR . "$newName");

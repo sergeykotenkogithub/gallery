@@ -32,6 +32,9 @@ function getOneResult($sql) {
     $result = @mysqli_query(getDb(), $sql) or die(mysqli_error(getDb()));
     return $result->fetch_assoc();
 }
+function getOneResultInto($sql) {
+  @mysqli_query(getDb(), $sql) or die(mysqli_error(getDb()));
+}
 
 // Количество строк в запросе update, delete итд
 
