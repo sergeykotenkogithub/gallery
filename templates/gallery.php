@@ -21,13 +21,25 @@
 
     <div class="gallery">
         <?php foreach ($gallery as $item): ?>
-            <a rel='gallery' class='photo' href="/?page=galleryone&id=<?=$item['id']?>"><img src='/gallery_img/small/<?=$item['image']?>' width='150' height='100'/></a>
+        <div class="imgWrapper">
+            <a rel='gallery' class='photo' href="/?page=galleryone&id=<?=$item['id']?>">
+                <img class="imgBigDel" src='/gallery_img/small/<?=$item['image']?>' width='150' height='100'/>
+            </a>
+            <a class="del" href="?action=delete&id=<?=$news['id']?>">[X]</a>
+        </div>
         <?php endforeach;?>
     </div>
 
+        <!--  Появляется блок при сортировке   -->
+
     <div class="gallerySort">
         <?php foreach ($gallerySort as $item): ?>
-            <a rel='gallery' class='photo' href="/?page=galleryone&id=<?=$item['id']?>"><img src='/gallery_img/small/<?=$item['image']?>' width='150' height='100'/></a>
+            <div class="imgWrapper">
+                <a rel='gallery' class='photo' href="/?page=galleryone&id=<?=$item['id']?>">
+                    <img class="imgBigDel" src='/gallery_img/small/<?=$item['image']?>' width='150' height='100'/>
+                </a>
+                <a class="del" href="?action=delete&id=<?=$news['id']?>">[X]</a>
+            </div>
         <?php endforeach;?>
     </div>
 
