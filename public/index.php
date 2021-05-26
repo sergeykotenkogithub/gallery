@@ -32,11 +32,16 @@ switch ($page) {
         $params['message'] = $messageUpload[$_GET['message']]; // Вывод сообщения
         $params['title'] = 'Gallery';
         $params['gallery'] = getGallery(); // Через базу данных
+        $params['gallerySort'] = getGallerySorting(); // Через базу данных
         break;
     case 'galleryone':
         $layout = 'galleryone';
         $id = (int)$_GET['id'];
         $params['gall'] = getOneGallery($id);
+        if ($_GET['page'] == 'galleryone') {
+            $id = (int)$_GET['id'];
+            changeViews($id);
+        }
         break;
     case 'news':
        $params['news'] = getNews();
