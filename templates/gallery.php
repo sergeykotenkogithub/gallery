@@ -25,7 +25,10 @@
             <a rel='gallery' class='photo' href="/?page=galleryone&id=<?=$item['id']?>">
                 <img class="imgBigDel" src='/gallery_img/small/<?=$item['image']?>' width='150' height='100'/>
             </a>
-            <a class="del" href="?action=delete&id=<?=$news['id']?>">[X]</a>
+            <!--   Удаление картинки         -->
+            <a class="del" href="?page=gallery&action=delete&id=<?=$item['id']?>&name=<?=$item['image']?>">
+                [X]
+            </a>
         </div>
         <?php endforeach;?>
     </div>
@@ -38,7 +41,7 @@
                 <a rel='gallery' class='photo' href="/?page=galleryone&id=<?=$item['id']?>">
                     <img class="imgBigDel" src='/gallery_img/small/<?=$item['image']?>' width='150' height='100'/>
                 </a>
-                <a class="del" href="?action=delete&id=<?=$news['id']?>">[X]</a>
+                <a class="del" href="?page=gallery&action=delete&id=<?=$item['id']?>">[X]</a>
             </div>
         <?php endforeach;?>
     </div>

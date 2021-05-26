@@ -38,10 +38,13 @@ switch ($page) {
         $layout = 'galleryone';
         $id = (int)$_GET['id'];
         $params['gall'] = getOneGallery($id);
+
+        // Изменение количество просмотров
         if ($_GET['page'] == 'galleryone') {
             $id = (int)$_GET['id'];
             changeViews($id);
         }
+
         break;
     case 'news':
        $params['news'] = getNews();
