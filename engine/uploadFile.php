@@ -2,7 +2,7 @@
 
 // Загрузка файла
 
-if (isset($_FILES['myfile'])) {
+function upload($getImages) {
 
 // Перемещение файла
 
@@ -84,5 +84,3 @@ if (isset($_FILES['myfile'])) {
     $image->save( UPLOADRESIZE . "$newName");
 
 }
-
-$message = $messageUpload[$_GET['page=gallery&message']];

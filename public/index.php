@@ -21,18 +21,26 @@ $params = [
 ];
 
 //Переменные для страниц
+
 switch ($page) {
+
     case 'index':
         $params['hello'] = 'Hello,';
         $params['welcome'] = 'Welcome !';
         $params['title'] = 'Hello';
         break;
+
     case 'gallery':
         $params['images'] = getImages();
-        $params['message'] = $messageUpload[$_GET['message']]; // Вывод сообщения
         $params['title'] = 'Gallery';
         $params['gallery'] = getGallery(); // Через базу данных
         $params['gallerySort'] = getGallerySorting(); // Через базу данных
+
+        // Проверка на загрузку фотографии и переименовывание
+        if (isset($_FILES['myfile'])) {
+            upload($getImages);
+        }
+        $params['message'] = $messageUpload[$_GET['message']]; // Вывод сообщения
 
         // Удаление и вывод сообщения
         $message_del = "";
@@ -44,11 +52,10 @@ switch ($page) {
             $idHard = $_GET['name'];
             deleteImg($idHard);
         }
-        $message_del = strip_tags($_GET['message_del']);
         $params['message_del'] =  strip_tags($_GET['message_del']);
-
         break;
-    case 'galleryone':
+
+    case 'galleryone': // Показывает одну страницу
         $layout = 'galleryone';
         $id = (int)$_GET['id'];
         $params['gall'] = getOneGallery($id);
@@ -59,6 +66,7 @@ switch ($page) {
             changeViews($id);
         }
         break;
+
     case 'news':
       $params['news'] = getNews();
        break;
