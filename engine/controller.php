@@ -79,11 +79,39 @@ function prepareVariables($page, $menu, $action = "") {
             $arg1 = $_GET['arg1'];
             $arg2 = $_GET['arg2'];
             $result = $_GET['result'];
-            if (isset($_GET['arg1'])) {
-                $result = $arg1 + $arg2;
-                $params['result'] = $result;
-                $params['arg1'] = $arg1;
-                $params['arg2'] = $arg2;
+
+            if (isset($_GET['arg1']) && isset($_GET['arg2'])) {
+                if ($_GET['operation'] == 'add') {
+                        $result = $arg1 + $arg2;
+                        $params['result'] = $result;
+                        $params['arg1'] = $arg1;
+                        $params['arg2'] = $arg2;
+                }
+                if ($_GET['operation'] == 'sub') {
+                    $result = $arg1 - $arg2;
+                    $params['result'] = $result;
+                    $params['arg1'] = $arg1;
+                    $params['arg2'] = $arg2;
+                }
+                if ($_GET['operation'] == 'mul') {
+                    $result = $arg1 * $arg2;
+                    $params['result'] = $result;
+                    $params['arg1'] = $arg1;
+                    $params['arg2'] = $arg2;
+                }
+                if ($_GET['operation'] == 'div') {
+                    if ($arg2 > 0) {
+                        $result = $arg1 / $arg2;
+                        $params['result'] = $result;
+                        $params['arg1'] = $arg1;
+                        $params['arg2'] = $arg2;
+                    }
+                    else {
+                        $params['arg1'] = $arg1;
+                        $params['arg2'] = $arg2;
+                        $params['result'] = 'Невозможно разделить на 0';
+                    }
+                }
             }
             break;
 //            getArg($arg1, $arg2, $result);
