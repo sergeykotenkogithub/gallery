@@ -9,11 +9,23 @@ $menu = [
     ],
     [
         "title" => "Gallery",
-        "href" => "/?page=gallery",
+        "href" => "/gallery",
     ],
     [
         "title" => "News",
-        "href" => "/?page=news",
+        "href" => "/news",
+    ],
+    [
+        "title" => "Сalculator",
+        "href" => "/calculator",
+    ],
+    [
+        "title" => "Сatalog",
+        "href" => "/catalog",
+    ],
+    [
+        "title" => "Feedback",
+        "href" => "/feedback",
     ],
 ];
 

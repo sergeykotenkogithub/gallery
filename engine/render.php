@@ -13,6 +13,8 @@ function renderTemplate($page, $params = []) {
 }
 
 function render ($page, $params = [], $layout = 'main') {
+
+
     return renderTemplate(LAYOUT_DIR . $layout, [
         'menu' => renderTemplate('menu', $params),
         'content' => renderTemplate($page, $params),
