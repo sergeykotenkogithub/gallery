@@ -34,7 +34,6 @@ include ROOT . "/engine/gallery.php";
 include ROOT . "/engine/menu.php";
 include ROOT . "/engine/render.php";
 include ROOT . "/engine/getFileImg.php";
-include ROOT . "/engine/classSimpleImage.php";
 include ROOT . "/engine/uploadFile.php";
 include ROOT . "/engine/delete.php";
 include ROOT . "/engine/calculator.php";
@@ -43,3 +42,4 @@ include ROOT . "/engine/calculator.php";
 include ROOT . "/module/feedback.php";  // Отзывы
 include ROOT . "/module/catalog.php"; // Каталог
 include ROOT . "/module/news.php"; // Новости
+include ROOT . "/module/classSimpleImage.php"; // Библиотека которая делает resize

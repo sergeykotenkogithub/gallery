@@ -24,9 +24,3 @@ function changeViews($id) {
 function deleteViews($id) {
     return getOneResultInto("DELETE FROM `gallery` where id = {$id};");
 }
-
-
-
-
-//$filepath =
-//unlink($filepath);

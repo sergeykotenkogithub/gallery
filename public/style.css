@@ -326,6 +326,8 @@ a {
 
 .buy {
 	margin-top: 15px;
+	border: 1px solid white;
+	padding: 10px;
 }
 
 /* Каталог */
@@ -343,4 +345,8 @@ a {
 	justify-content: center;
 	align-items: center;
 	padding: 20px 0;
+}
+
+.price {
+	margin-top: 15px;
 }

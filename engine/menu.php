@@ -20,6 +20,10 @@ $menu = [
         "href" => "/calculator",
     ],
     [
+        "title" => "Сalculator+",
+        "href" => "/calculatorOperate",
+    ],
+    [
         "title" => "Сatalog",
         "href" => "/catalog",
     ],

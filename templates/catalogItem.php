@@ -6,6 +6,12 @@
         </div>
         <div><?=$catalog['description']?> </div>
         <div class="rub catalogItemPrice">Цена:<?=$catalog['price']?></div>
-        <button class="buy">Купить</button>
+        <button class="buy">КУПИТЬ</button>
+
+        <div class="feedbackCatalog">
+            <h2>Отзывы:</h2>
+            <div> <?=$feedback['name']?> : <?=$feedback['feedback']?></div>
+        </div>
+
     </div>
 </div>

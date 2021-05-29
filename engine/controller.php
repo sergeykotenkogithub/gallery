@@ -1,7 +1,7 @@
 <?php
 //// Контроллер
 //
-function prepareVariables($page, $menu, $action = "") {
+function prepareVariables($page, $menu, $action = "", $layout = "") {
 
     // $params для указания переменной на всех страницах
     $params = [
@@ -72,6 +72,12 @@ function prepareVariables($page, $menu, $action = "") {
             $params['catalog'] = getAllCatalog();
             break;
 
+        case 'catalogItem':
+            $id = (int)$_GET['id'];
+            $params['catalog'] = getOneCatalog($id);
+            $params['feedback'] = getItemFeedback($id);
+            break;
+
         case 'calculator':
             $params['arg1'] = 0;
             $params['arg2'] = 0;
@@ -115,10 +121,7 @@ function prepareVariables($page, $menu, $action = "") {
             }
             break;
 //            getArg($arg1, $arg2, $result);
-        case 'catalogItem':
-            $id = (int)$_GET['id'];
-            $params['catalog'] = getOneCatalog($id);
-            break;
+
     }
     return $params;
 }
