@@ -1,16 +1,16 @@
 <?php
 
 function doCalculatorOperation($arg1, $arg2, $operation) {
-    if ($operation == 'add') {
+    if ($operation == '+') {
         $result = $arg1 + $arg2;
     }
-    if ($operation == 'sub') {
+    if ($operation == '-') {
         $result = $arg1 - $arg2;
     }
-    if ($operation == 'mul') {
+    if ($operation == '*') {
         $result = $arg1 * $arg2;
     }
-    if ($operation == 'div') {
+    if ($operation == '/') {
         if ($arg2 ==! 0) {
             $result = $arg1 / $arg2;
         }
