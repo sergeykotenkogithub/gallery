@@ -1,15 +1,9 @@
 <?php
 
-//function getArg($arg1,$arg2 ) {
-//
-//    if (isset($_GET['arg1'])) {
-////        $result = $arg1 + $arg2;
-////        $params['result'] = $result;
-////        $params['result'] = $result;
-//        $params['arg1'] = $arg1;
-////        $params['arg2'] = $arg2;
-//
+//function sum($arg1, $arg2, $operation, $result) {
+//    if ($operation == 'add') {
+//        $result = $arg1 + $arg2;
 //    }
 //
-//    return $params['arg1'];
+//    return $result;
 //}

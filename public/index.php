@@ -21,7 +21,7 @@ if ($url_array[1] == "") {
 
 // Переход в контролер
 
-$params = prepareVariables($page, $menu, $action, $layout);
+$params = prepareVariables($page, $menu, $layout = 'main', $action);
 
 // .................................................................................
 

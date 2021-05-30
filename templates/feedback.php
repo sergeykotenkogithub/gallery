@@ -7,7 +7,7 @@
         <input type="submit" value="Добавить">
     </form>
     <?foreach ($feedback as $value): ?>
-        <div><strong><?=$value['name']?></strong>: <?=$value['feedback']?></div>
+        <div class="feedback" ><strong><?=$value['name']?></strong>: <?=$value['feedback']?></div>
     <? endforeach;?>
 </div>
 

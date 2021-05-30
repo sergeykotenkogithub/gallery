@@ -1,7 +1,8 @@
 <?php
-//// Контроллер
-//
-function prepareVariables($page, $menu, $action = "", $layout = "") {
+
+// Контроллер
+
+function prepareVariables($page, $menu, $layout = "main", $action = "") {
 
     // $params для указания переменной на всех страницах
     $params = [
@@ -90,38 +91,70 @@ function prepareVariables($page, $menu, $action = "", $layout = "") {
                 if ($_GET['operation'] == 'add') {
                         $result = $arg1 + $arg2;
                         $params['result'] = $result;
-                        $params['arg1'] = $arg1;
-                        $params['arg2'] = $arg2;
                 }
                 if ($_GET['operation'] == 'sub') {
                     $result = $arg1 - $arg2;
                     $params['result'] = $result;
-                    $params['arg1'] = $arg1;
-                    $params['arg2'] = $arg2;
                 }
                 if ($_GET['operation'] == 'mul') {
                     $result = $arg1 * $arg2;
                     $params['result'] = $result;
-                    $params['arg1'] = $arg1;
-                    $params['arg2'] = $arg2;
                 }
                 if ($_GET['operation'] == 'div') {
-                    if ($arg2 > 0) {
+                    if ($arg2 ==! 0) {
                         $result = $arg1 / $arg2;
                         $params['result'] = $result;
-                        $params['arg1'] = $arg1;
-                        $params['arg2'] = $arg2;
                     }
                     else {
-                        $params['arg1'] = $arg1;
-                        $params['arg2'] = $arg2;
                         $params['result'] = 'Невозможно разделить на 0';
                     }
                 }
+                $params['arg1'] = $arg1;
+                $params['arg2'] = $arg2;
             }
-            break;
-//            getArg($arg1, $arg2, $result);
 
+            break;
+
+        case 'calculatorOperate':
+            $params['arg1'] = 0;
+            $params['arg2'] = 0;
+            $params['result'] = 0;
+            $arg1 = $_GET['arg1'];
+            $arg2 = $_GET['arg2'];
+            $result = $_GET['result'];
+            $operation = $_GET['operation'];
+
+
+            if (isset($_GET['arg1']) && isset($_GET['arg2'])) {
+
+
+                if ($operation == 'add') {
+                    $result = $arg1 + $arg2;
+                    $params['result'] = $result;
+                }
+                if ($operation == 'sub') {
+                    $result = $arg1 - $arg2;
+                    $params['result'] = $result;
+                }
+                if ($operation == 'mul') {
+                    $result = $arg1 * $arg2;
+                    $params['result'] = $result;
+                }
+                if ($operation == 'div') {
+                    if ($arg2 ==! 0) {
+                        $result = $arg1 / $arg2;
+                        $params['result'] = $result;
+                    }
+                    else {
+                        $params['result'] = 'Невозможно разделить на 0';
+                    }
+                }
+
+                $params['arg1'] = $arg1;
+                $params['arg2'] = $arg2;
+            }
+
+            break;
     }
     return $params;
 }
