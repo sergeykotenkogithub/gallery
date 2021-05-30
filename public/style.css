@@ -328,6 +328,7 @@ a {
 	margin-top: 15px;
 	border: 1px solid white;
 	padding: 10px;
+	border-radius: 50px;
 }
 
 /* Каталог */
@@ -345,6 +346,7 @@ a {
 	justify-content: center;
 	align-items: center;
 	padding: 20px 0;
+	border-radius: 30px;
 }
 
 .price {
@@ -353,4 +355,8 @@ a {
 
 .feedback {
 	padding: 15px 0;
+}
+
+.active a{
+	color: darkgray;
 }

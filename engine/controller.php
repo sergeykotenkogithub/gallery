@@ -2,12 +2,14 @@
 
 // Контроллер
 
-function prepareVariables($page, $menu, $layout = "main", $action = "") {
+function prepareVariables($page, $menu, $messageUpload, $getImages, $action = "") {
 
     // $params для указания переменной на всех страницах
     $params = [
         'list' => getMenu($menu),
+
     ];
+    $params['layout'] = "main";
 
     //Переменные для страниц
     switch ($page) {
@@ -20,9 +22,9 @@ function prepareVariables($page, $menu, $layout = "main", $action = "") {
 
         case 'gallery':
             $params['images'] = getImages();
-            $params['title'] = 'Gallery';
-            $params['gallery'] = getGallery(); // Через базу данных
-            $params['gallerySort'] = getGallerySorting(); // Через базу данных
+            $params['title'] = 'Gallery'; // Заголок
+            $params['gallery'] = getGallery(); // Через базу данных получаю полный список
+            $params['gallerySort'] = getGallerySorting(); // Через базу данных получаю отсортированный список
 
             // Проверка на загрузку фотографии и переименовывание
             if (isset($_FILES['myfile'])) {
@@ -31,28 +33,23 @@ function prepareVariables($page, $menu, $layout = "main", $action = "") {
             $params['message'] = $messageUpload[$_GET['message']]; // Вывод сообщения
 
             // Удаление и вывод сообщения
+
+//            doGalleryAction($action);
+
             $message_del = "";
             if ($_GET['action'] == 'delete') {
-                // Удаление с базы данных
                 $id = (int)$_GET['id'];
-                deleteViews($id);
-                // Удаление с компьютера
+                deleteViews($id);  // Удаление с базы данных
                 $idHard = $_GET['name'];
-                deleteImg($idHard);
+                deleteImg($idHard); // Удаление с компьютера
             }
             $params['message_del'] =  strip_tags($_GET['message_del']);
             break;
 
         case 'galleryone': // Показывает одну страницу
-            $layout = 'galleryone';
             $id = (int)$_GET['id'];
+            changeViews($id); // Изменение количество просмотров
             $params['gall'] = getOneGallery($id);
-
-            // Изменение количество просмотров
-            if ($_GET['page'] == 'galleryone') {
-                $id = (int)$_GET['id'];
-                changeViews($id);
-            }
             break;
 
         case 'news':

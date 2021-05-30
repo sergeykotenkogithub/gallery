@@ -1,6 +1,7 @@
 <?php
 
 // Пути файлов
+
 define('ROOT', dirname(__DIR__)); // К основной директории, не public
 define('TEMPLATES_DIR', ROOT . '/templates/'); // К модулям
 define('LAYOUT_DIR', 'layouts/'); // К основным шаблонам
@@ -20,26 +21,30 @@ $messageUpload = [
 ];
 
 // DB config
+
 define('HOST', 'localhost:3307');
 define('USER', 'pakko');
 define('PASS', '123');
 define('DB', 'gallerybase');
 
 
-// Подключение модулей
+// Подключение сервисных функций
 
-include ROOT . "/engine/controller.php";
-include ROOT . "/engine/db.php";
-include ROOT . "/engine/gallery.php";
-include ROOT . "/engine/menu.php";
-include ROOT . "/engine/render.php";
-include ROOT . "/engine/getFileImg.php";
-include ROOT . "/engine/uploadFile.php";
-include ROOT . "/engine/delete.php";
-include ROOT . "/engine/calculator.php";
+include ROOT . "/engine/controller.php"; // Контролер
+include ROOT . "/engine/db.php"; // Подключение к базе данных
+include ROOT . "/engine/render.php"; // Прорисовка
 
 // Модули
+
+include ROOT . "/module/menu.php"; // Меню
 include ROOT . "/module/feedback.php";  // Отзывы
 include ROOT . "/module/catalog.php"; // Каталог
 include ROOT . "/module/news.php"; // Новости
 include ROOT . "/module/classSimpleImage.php"; // Библиотека которая делает resize
+include ROOT . "/module/calculator.php"; // Калькулятор
+
+// Всё что относится к модулю галерея
+
+include ROOT . "/module/gallery/fileImg.php"; // Всё что относится к загрузке и удалению
+include ROOT . "/module/gallery/uploadFile.php"; // Проверка на загрузку файла
+include ROOT . "/module/gallery/dbGallery.php"; // Всё что связоно с запросами к галереи

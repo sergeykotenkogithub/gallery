@@ -6,8 +6,6 @@ function upload($getImages) {
 
 // Перемещение файла
 
-//        pushOneGallery($_FILES['myfile']['name']);
-
         $path = IMG_BIG . $_FILES['myfile']['name'];
         define("UPLOADDIR", IMG_BIG); // Куда
         define("UPLOADRESIZE", IMG_SMALL); // Resize
@@ -19,39 +17,39 @@ function upload($getImages) {
 
         //Проверка существует ли файл
         if (file_exists($uploadfile)) {
-            header("Location: /?page=gallery&message=DOUBLE");
+            header("Location: /gallery/?message=DOUBLE");
             exit;
         }
         //Проверка на размер файла
         if($_FILES["myfile"]["size"] > 1024*5*1024)
         {
-            header("Location: /?page=gallery&message=BIGSIZE");
+            header("Location: /gallery/?message=BIGSIZE");
             exit;
         }
         //Проверка расширения файла
         $blacklist = array(".php", ".phtml", ".php3", ".php4");
         foreach ($blacklist as $item) {
             if(preg_match("/$item\$/i", $_FILES['myfile']['name'])) {
-                header("Location: /?page=gallery&message=NOTPHP");
+                header("Location: /gallery/?message=NOTPHP");
                 exit;
             }
         }
         //Проверка на тип файла
         $imageinfo = getimagesize($_FILES['myfile']['tmp_name']);
         if($imageinfo['mime'] != 'image/gif' && $imageinfo['mime'] != 'image/jpeg') {
-            header("Location: /?page=gallery&message=NOTIMG");
+            header("Location: /gallery/?message=NOTIMG");
             exit;
         }
         if($_FILES['myfile']['type'] != "image/jpeg") {
-            header("Location: /?page=gallery&message=JPG");
+            header("Location: /gallery/?message=JPG");
             exit;
         }
         // Сообщение о загрузке файла
         if (move_uploaded_file($_FILES['myfile']['tmp_name'], $path)){
-            header("Location: /?page=gallery&message=OK");
+            header("Location: /gallery/?message=OK");
         }
         else {
-            header("Location: /?page=gallery&message=ERROR");
+            header("Location: /gallery/?message=ERROR");
             die();
         }
 

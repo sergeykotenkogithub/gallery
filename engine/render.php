@@ -12,10 +12,10 @@ function renderTemplate($page, $params = []) {
     return ob_get_clean();
 }
 
-function render ($page, $params = [], $layout = 'main') {
+function render ($page, $params) {
 
 
-    return renderTemplate(LAYOUT_DIR . $layout, [
+    return renderTemplate(LAYOUT_DIR . $params['layout'], [
         'menu' => renderTemplate('menu', $params),
         'content' => renderTemplate($page, $params),
         'title' => $params['title'],  // Заголок который находится в main.php
