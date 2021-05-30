@@ -9,6 +9,6 @@
         <input type="submit" name="operation" value="mul">*
         <input type="submit" name="operation" value="div">/
 
-        <input type="text" name="result" readonly value="<?=$result?>">
+        <input class="result" type="text" name="result" readonly value="<?=$result?>">
     </form>
 </div>

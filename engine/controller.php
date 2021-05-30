@@ -21,7 +21,6 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             break;
 
         case 'gallery':
-            $params['images'] = getImages();
             $params['title'] = 'Gallery'; // Заголок
             $params['gallery'] = getGallery(); // Через базу данных получаю полный список
             $params['gallerySort'] = getGallerySorting(); // Через базу данных получаю отсортированный список
@@ -33,17 +32,9 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $params['message'] = $messageUpload[$_GET['message']]; // Вывод сообщения
 
             // Удаление и вывод сообщения
-
-//            doGalleryAction($action);
-
-            $message_del = "";
-            if ($_GET['action'] == 'delete') {
-                $id = (int)$_GET['id'];
-                deleteViews($id);  // Удаление с базы данных
-                $idHard = $_GET['name'];
-                deleteImg($idHard); // Удаление с компьютера
-            }
+            doGalleryAction($action);
             $params['message_del'] =  strip_tags($_GET['message_del']);
+
             break;
 
         case 'galleryone': // Показывает одну страницу

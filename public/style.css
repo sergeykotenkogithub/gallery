@@ -360,3 +360,7 @@ a {
 .active a{
 	color: darkgray;
 }
+
+.result {
+	width: 190px;
+}

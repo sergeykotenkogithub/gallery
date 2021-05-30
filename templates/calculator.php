@@ -9,6 +9,6 @@
         </select>
         <input type="text" name="arg2" value="<?=$arg2?>">
         <button type="submit">=</button>
-        <input type="text" name="result" readonly value="<?=$result?>">
+        <input class="result" type="text" name="result" readonly value="<?=$result?>">
     </form>
 </div>

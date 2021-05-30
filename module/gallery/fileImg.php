@@ -19,6 +19,8 @@ function deleteImg($idHard) {
     die();
 }
 
+// При действие нажатия на кнопку удаления изображения
+
 function doGalleryAction($action) {
     $message_del = "";
     if ($action == 'delete') {
