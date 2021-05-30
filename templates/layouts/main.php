@@ -6,10 +6,10 @@
     <link rel="stylesheet" type="text/css" href="/galerry.css?<?php echo uniqid();?>"/>
 </head>
 
+<body>
+
 <?=$menu?>
 <?=$content?>
-
-<script src="scripts/input.js"></script>
 
 </body>
 </html>

@@ -49,3 +49,6 @@
         <?php endforeach;?>
     </div>
 </div>
+
+<script src="/scripts/input.js"></script>
+
