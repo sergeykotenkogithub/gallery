@@ -8,7 +8,7 @@
         <input type="submit" name="operation" value="-">
         <input type="submit" name="operation" value="*">
         <input type="submit" name="operation" value="/">
-
+         =
         <input class="result" type="text" name="result" readonly value="<?=$result?>">
     </form>
 </div>
