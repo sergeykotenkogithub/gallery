@@ -12,7 +12,7 @@
                         <br>
                     </div>
                 </a>
-                <button class="buy">Купить</button>
+            <a class="buy" href="">Купить</a>
         </div>
             <? endforeach; ?>
 

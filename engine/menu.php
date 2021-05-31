@@ -24,6 +24,10 @@ $menu = [
         "href" => "/calculatorOperate",
     ],
     [
+        "title" => "СalcAjax",
+        "href" => "/calcAjax",
+    ],
+    [
         "title" => "Сatalog",
         "href" => "/catalog",
     ],

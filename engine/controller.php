@@ -9,6 +9,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         'list' => getMenu($menu),
 
     ];
+
     $params['layout'] = "main";
 
     //Переменные для страниц
@@ -18,6 +19,42 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $params['hello'] = 'Hello,';
             $params['welcome'] = 'Welcome !';
             $params['title'] = 'Hello';
+            break;
+
+        // Страница не создаётся, просто нужно для передачи с калькулятора, как api, в данном примере считает данные и отдаёт обратно.
+        case 'apicalc':
+            $data = json_decode(file_get_contents('php://input'));
+
+            $arg1 = $data->arg1;
+            $arg2 = $data->arg2;
+            $operation = $data->operation;
+
+
+            if ( $operation == '+') {
+                $response  = $arg1 + $arg2;
+            }
+            if ( $operation == '*') {
+                $response  = $arg1 * $arg2;
+            }
+            if ( $operation == '-') {
+                $response  = $arg1 - $arg2;
+            }
+            if ( $operation == '/') {
+                if ($arg2 == 0) {
+                    $response = 'Деление на ноль невозможно';
+                }
+                else {
+                    $response  = $arg1 / $arg2;
+                }
+            }
+
+
+
+
+            header("Content-type: application/json");
+            echo json_encode($response);
+            die();
+
             break;
 
         case 'gallery':
