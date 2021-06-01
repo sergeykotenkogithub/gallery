@@ -1,11 +1,11 @@
 <div class="container">
     <div>
-        <h2><?=$catalog['name']?></h2>
+        <h2><?=$goods['name']?></h2>
         <div class="catalogItemImg">
-            <img  src="/img/catalog/<?=$catalog['image']?>">
+            <img  src="/img/catalog/<?=$goods['image']?>">
         </div>
-        <div><?=$catalog['description']?> </div>
-        <div class="rub catalogItemPrice">Цена:<?=$catalog['price']?></div>
+        <div><?=$goods['description']?> </div>
+        <div class="rub catalogItemPrice">Цена:<?=$goods['price']?></div>
         <button class="buy">КУПИТЬ</button>
 
         <div class="feedbackCatalog">

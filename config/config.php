@@ -38,12 +38,13 @@ include ROOT . "/engine/menu.php"; // Меню
 // Модели
 
 include ROOT . "/models/feedback.php";  // Отзывы
-include ROOT . "/models/catalog.php"; // Каталог
+include ROOT . "/models/goods.php"; // Каталог
 include ROOT . "/models/news.php"; // Новости
 include ROOT . "/models/classSimpleImage.php"; // Библиотека которая делает resize
 include ROOT . "/models/calculator.php"; // Калькулятор
+include ROOT . "/models/auth.php"; // Калькулятор
 
-// Всё что относится к модели галерея
+// Всё что относится к модели: "gallery"
 
 include ROOT . "/models/gallery/fileImg.php"; // Всё что относится к загрузке и удалению
 include ROOT . "/models/gallery/uploadFile.php"; // Проверка на загрузку файла

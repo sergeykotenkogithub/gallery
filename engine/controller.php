@@ -7,8 +7,10 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
     // $params для указания переменной на всех страницах
     $params = [
         'list' => getMenu($menu),
-
     ];
+
+    $params['name'] = get_user();
+    $params['auth'] = isAuth();
 
     $params['layout'] = "main";
 
@@ -21,38 +23,43 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $params['title'] = 'Hello';
             break;
 
+        case 'login':
+            $login = $_POST['login'];
+            $pass = $_POST['pass'];
+            if (auth($login, $pass)) {
+                if (isset($_POST['save'])) {
+                    $hash = uniqid(rand(), true);
+                    $id = $_SESSION['id'];
+                    $sql = "UPDATE users SET hash = '{$hash}' WHERE id = {$id}";
+                    $result = mysql_query(getDb(), $sql);
+                    setcookie("hash", $hash, time() +3600, "/");
+                }
+                header("Location: /");
+                die();
+            } else {
+                die("Не верный логин пароль");
+            }
+
+            break;
+        case 'logout':
+            setcookie("hash", "", time()-1, "/" );
+            session_regenerate_id();
+            session_destroy();
+            header("Location: /");
+            die();
+            break;
+
+
         // Страница не создаётся, просто нужно для передачи с калькулятора, как api, в данном примере считает данные и отдаёт обратно.
         case 'apicalc':
-            $data = json_decode(file_get_contents('php://input'));
 
+            $data = json_decode(file_get_contents('php://input'));
             $arg1 = $data->arg1;
             $arg2 = $data->arg2;
             $operation = $data->operation;
 
-
-            if ( $operation == '+') {
-                $response  = $arg1 + $arg2;
-            }
-            if ( $operation == '*') {
-                $response  = $arg1 * $arg2;
-            }
-            if ( $operation == '-') {
-                $response  = $arg1 - $arg2;
-            }
-            if ( $operation == '/') {
-                if ($arg2 == 0) {
-                    $response = 'Деление на ноль невозможно';
-                }
-                else {
-                    $response  = $arg1 / $arg2;
-                }
-            }
-
-
-
-
             header("Content-type: application/json");
-            echo json_encode($response);
+            echo json_encode(doCalculatorOperation($arg1, $arg2, $operation));
             die();
 
             break;
@@ -94,13 +101,13 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $params['feedback'] = getAllFeedback();
             break;
 
-        case 'catalog':
-            $params['catalog'] = getAllCatalog();
+        case 'goods':
+            $params['goods'] = getAllCatalog();
             break;
 
-        case 'catalogItem':
+        case 'goodsItem':
             $id = (int)$_GET['id'];
-            $params['catalog'] = getOneCatalog($id);
+            $params['goods'] = getOneCatalog($id);
             $params['feedback'] = getItemFeedback($id);
             break;
 
