@@ -43,6 +43,7 @@ include ROOT . "/models/news.php"; // Новости
 include ROOT . "/models/classSimpleImage.php"; // Библиотека которая делает resize
 include ROOT . "/models/calculator.php"; // Калькулятор
 include ROOT . "/models/auth.php"; // Калькулятор
+include ROOT . "/models/basket.php"; // Корзина
 
 // Всё что относится к модели: "gallery"
 
