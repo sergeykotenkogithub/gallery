@@ -328,6 +328,7 @@ a {
 	border: 1px solid white;
 	padding: 10px;
 	border-radius: 50px;
+	display: inline-block
 }
 
 /* Каталог */
@@ -362,4 +363,18 @@ a {
 
 .result {
 	width: 190px;
+}
+
+.basket {
+	display: flex;
+	align-items: center;
+	padding: 10px;
+}
+
+.basket div {
+	padding-right: 10px;
+}
+
+.basket__del {
+	margin-bottom: 18px;
 }
