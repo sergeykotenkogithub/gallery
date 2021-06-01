@@ -35,6 +35,10 @@ $menu = [
         "title" => "Feedback",
         "href" => "/feedback",
     ],
+    [
+        "title" => "Basket",
+        "href" => "/basket",
+    ],
 ];
 
 function getMenu($menu)

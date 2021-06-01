@@ -19,6 +19,19 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
     //Переменные для страниц
     switch ($page) {
 
+        // Корзина
+        case 'basket':
+            session_start();
+            $session = session_id();
+            $db = @mysqli_connect(HOST, USER, PASS, DB) or die("Could not connect: " . mysqli_connect_error());
+            $basket = mysqli_query($db,  "SELECT basket.id as basket_id, goods.id as goods_id, goods.name as name, goods.price as price FROM basket, goods WHERE basket.goods_id=goods.id AND session_id='{$session}'");
+            $result = mysqli_query($db, "SELECT count(id) as count FROM basket WHERE session_id = '{$session}' ");
+            $count = mysqli_fetch_assoc($result)['count'];
+            $params['count'] = $count;
+            $params['basket'] = $basket;
+//            if ()
+            break;
+
         // .................Авторизация.................................................
 
         case 'login':
@@ -29,7 +42,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
                     $hash = uniqid(rand(), true);
                     $id = $_SESSION['id'];
                     $sql = "UPDATE users SET hash = '{$hash}' WHERE id = {$id}";
-                    $result = mysql_query(getDb(), $sql);
+                    $result = mysqli_query(getDb(), $sql);
                     setcookie("hash", $hash, time() +3600, "/");
                 }
                 header("Location: /");
@@ -97,7 +110,20 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         // Товары
 
         case 'goods':
+            session_start();
+            $session = session_id();
+            $db = @mysqli_connect(HOST, USER, PASS, DB) or die("Could not connect: " . mysqli_connect_error());
             $params['goods'] = getAllCatalog();
+            $id = $_POST['goods_id'];
+            $result = mysqli_query($db, "SELECT count(id) as count FROM basket WHERE session_id = '{$session}' ");
+            $count = mysqli_fetch_assoc($result)['count'];
+            if (isset($_POST['goods_id'])) {
+//                var_dump($_REQUEST);
+                mysqli_query($db, "INSERT INTO basket (session_id, goods_id) VALUE ('{$session}', '{$id}') ");
+                header("Location: /goods");
+                die();
+            }
+
             break;
         case 'goodsItem':
             $id = (int)$_GET['id'];

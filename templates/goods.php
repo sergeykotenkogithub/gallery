@@ -3,7 +3,9 @@
 
         <? foreach ($goods as $item): ?>
             <div class="catalog">
-                <form action="/goodsItems/?action=buy&id=<?= $item['id'] ?>">
+<!--                <form action="/basket/?action=buy" method="post">-->
+                <form action="/goods" method="post">
+                    <input hidden type="text" name="goods_id" value="<?= $item['id'] ?>">
                     <a href="/goodsItem/?id=<?= $item['id'] ?>">
                         <div>
                             <h2><?= $item['name'] ?></h2>
