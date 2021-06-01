@@ -19,6 +19,17 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
     //Переменные для страниц
     switch ($page) {
 
+        case 'congratulations':
+            session_start();
+            $session = session_id();
+            $tel = $_POST['tel'];
+            $email = $_POST['email'];
+
+            if (isset($tel) && isset($email)) {
+//                var_dump($session, $tel, $email);
+                pushOrder($session, $tel, $email);
+            }
+        break;
 
 
         // .................Авторизация.................................................
@@ -39,14 +50,14 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             } else {
                 die("Не верный логин пароль");
             }
-            break;
+        break;
         case 'logout':
             setcookie("hash", "", time()-1, "/" );
             session_regenerate_id();
             session_destroy();
             header("Location: /");
             die();
-            break;
+        break;
 
         // .................Страницы.................................................
 
@@ -124,6 +135,10 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $count = mysqli_fetch_assoc($result)['count'];
             $params['count'] = $count; // Вывож количество товара
             $params['basket'] = getBasketItem($session); // вывод товаров в корзине
+
+            $return2 = mysqli_query(getDb(), "SELECT SUM(goods.price) as summ FROM basket, goods WHERE basket.goods_id = goods.id AND session_id = '{$session}'");
+            $summ = mysqli_fetch_assoc($return2)['summ'];
+            $params['summ'] = $summ;
 
             // Удаление
 

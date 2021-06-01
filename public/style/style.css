@@ -175,7 +175,7 @@ li {
 }
 
 .menu__wrapper li {
-	padding: 5px 30px 5px 30px;
+	padding: 5px 30px 15px 30px;
 }
 
 a {
@@ -199,7 +199,6 @@ a {
 
 .menu__link {
 	padding: 10px;
-	border-right: 1px solid white;
 	font-size: 27px;
 }
 .menu__link a {
@@ -328,13 +327,21 @@ a {
 	border: 1px solid white;
 	padding: 10px;
 	border-radius: 50px;
-	display: inline-block
+	display: inline-block;
+	color: white;
+	transition: color 0.5s;
 }
+
+.buy:hover {
+	color: darkgray;
+}
+
 
 /* Каталог */
 
 .catalogWrapper {
 	display: flex;
+	padding: 0 50px;
 }
 
 .catalog {
@@ -377,4 +384,74 @@ a {
 
 .basket__del {
 	margin-bottom: 18px;
+}
+
+.basket__name {
+	width: 90px;
+}
+
+.total {
+	padding-top: 30px;
+}
+
+.order {
+	color: white;
+	transition: color 0.5s;
+	padding: 35px 0 25px 0;
+
+}
+
+.order:hover {
+	color: darkgray;
+}
+
+.order a {
+	padding: 10px;
+	border: 1px solid white;
+	border-radius: 50px;
+}
+
+.orderBuy form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.formOrder input {
+	margin-top: 20px;
+	width: 200px;
+	height: 40px;
+	background: transparent;
+	color: white;
+	font-size: 16px;
+	border: 1px solid white;
+	padding: 5px 25px;
+}
+
+.thanks {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.thanks div {
+
+}
+
+.thanks__ok{
+	font-size: 40px;
+	text-align: center;
+}
+
+.thanks__text {
+	padding-left: 45px;
+	padding-top: 28px;
+	padding-bottom: 20px;
+	line-height: 28px;
+}
+
+.basket__price {
+	width: 75px;
+	text-align: center;
 }

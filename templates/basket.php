@@ -1,17 +1,19 @@
 <div class="container">
-    <?=$count?> в корзине
+    Товаров в корзине: <?=$count?>
     <br>
     <br>
     <?php foreach ($basket as $item): ?>
     <div class="basket">
-        <div><?=$item['name']?> </div>
+        <div class="basket__name"><?=$item['name']?> </div>
         <div>
             <img src="/img/goods/<?= $item['image'] ?>" width="100">
         </div>
-        <div class="rub"><?=$item['price']?></div>
-        <div class="buy basket__del" >
-            <a href="/basket/?action=delete&id=<?=$item['basket_id']?>&session=<?=$item['session_id']?>">Удалить</a>
+        <div class="rub basket__price"><?=$item['price']?></div>
+        <div class="basket__del" >
+            <a class="buy" href="/basket/?action=delete&id=<?=$item['basket_id']?>&session=<?=$item['session_id']?>">Удалить</a>
         </div>
     </div>
     <?php endforeach;?>
+    <div class="rub total">Итого: <?=$summ?> </div>
+    <div class="order"><a href="/order">Оформить заказ</a></div>
 </div>

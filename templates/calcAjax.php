@@ -1,14 +1,14 @@
 <div class="container">
-    <div class="container">
-        <input name="arg1" type="text" id="arg1">
-        <input class="operation" type="submit" name="operation" value='+'>
-        <input class="operation" type="submit" name="operation" value='*'>
-        <input class="operation" type="submit" name="operation" value='/'>
-        <input class="operation" type="submit" name="operation" value='-'>
-        <input name="arg2" type="text" id="arg2">
-        =
-        <input style="width:200px;" name="result" class="result" type="text" id="result" value="">
-    </div>
+
+    <input name="arg1" type="text" id="arg1">
+    <input class="operation" type="submit" name="operation" value='+'>
+    <input class="operation" type="submit" name="operation" value='*'>
+    <input class="operation" type="submit" name="operation" value='/'>
+    <input class="operation" type="submit" name="operation" value='-'>
+    <input name="arg2" type="text" id="arg2">
+    =
+    <input style="width:200px;" name="result" class="result" type="text" id="result" value="">
+
 
     <script>
         let operation = document.querySelectorAll("input[name='operation']");
