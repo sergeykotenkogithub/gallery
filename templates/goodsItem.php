@@ -2,7 +2,7 @@
     <div>
         <h2><?=$goods['name']?></h2>
         <div class="catalogItemImg">
-            <img  src="/img/catalog/<?=$goods['image']?>">
+            <img  src="/img/goods/<?=$goods['image']?>">
         </div>
         <div><?=$goods['description']?> </div>
         <div class="rub catalogItemPrice">Цена:<?=$goods['price']?></div>
