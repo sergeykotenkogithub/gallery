@@ -162,6 +162,7 @@ menu {
 	padding: 10px;
 	box-sizing: border-box;
 	flex-wrap: wrap;
+	position: relative;
 }
 
 li {
@@ -459,4 +460,20 @@ a {
 .basket__price {
 	width: 75px;
 	text-align: center;
+}
+
+.buySubmit {
+	display: flex;
+	align-items: center;
+}
+
+.buySubmit div {
+	padding-left: 25px;
+}
+
+.countBasket {
+	color: white;
+	position: absolute;
+	right: 80px;
+	bottom: 48px;
 }

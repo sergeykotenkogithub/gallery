@@ -19,19 +19,6 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
     //Переменные для страниц
     switch ($page) {
 
-        case 'congratulations':
-            session_start();
-            $session = session_id();
-            $tel = $_POST['tel'];
-            $email = $_POST['email'];
-
-            if (isset($tel) && isset($email)) {
-//                var_dump($session, $tel, $email);
-                pushOrder($session, $tel, $email);
-            }
-        break;
-
-
         // .................Авторизация.................................................
 
         case 'login':
@@ -69,7 +56,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $params['title'] = 'Hello';
             break;
 
-        // Отзыввы
+        // Отзывы
 
         case 'feedback':
             doFeedbackAction($action);
@@ -107,57 +94,6 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $params['news'] = getOneNews($id);
             break;
 
-        // Товары
-
-        case 'goods':
-            session_start();
-            $session = session_id();
-            $params['goods'] = getAllCatalog();
-            $id = $_POST['goods_id'];
-            if (isset($_POST['goods_id'])) {
-                addBasket($session, $id);
-                header("Location: /goods");
-                die();
-            }
-            break;
-        case 'goodsItem':
-            session_start();
-            $session = session_id();
-//            var_dump($_REQUEST);
-            $id = (int)$_GET['id'];
-            $params['goods'] = getOneCatalog($id);
-            $params['feedback'] = getItemFeedback($id);
-            $id = $_POST['goods_id'];
-            if (isset($_POST['goods_id'])) {
-                addBasket($session, $id);
-            }
-            break;
-
-        // Корзина
-        case 'basket':
-            session_start();
-            $session = session_id();//
-            $result = mysqli_query(getDb(), "SELECT count(id) as count FROM basket WHERE session_id = '{$session}' ");
-//            $result = countGoodsBasketItem($session); // !!!! Не выходит!! ПОЧЕМУ?
-            $count = mysqli_fetch_assoc($result)['count'];
-            $params['count'] = $count; // Вывож количество товара
-            $params['basket'] = getBasketItem($session); // вывод товаров в корзине
-
-            $return2 = mysqli_query(getDb(), "SELECT SUM(goods.price) as summ FROM basket, goods WHERE basket.goods_id = goods.id AND session_id = '{$session}'");
-            $summ = mysqli_fetch_assoc($return2)['summ'];
-            $params['summ'] = $summ;
-
-            // Удаление
-
-            $id = (int)$_GET['id'];
-            $session_id = $_GET['session'];
-            if (($_GET['action'] == 'delete') && ($session_id == "$session") ){
-                deleteBasketItem($id);
-                header("Location: /basket");
-            }
-
-            break;
-
         // Калькуляторы
 
         case 'calculator':
@@ -172,6 +108,74 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
                 $params['arg1'] = $arg1;
                 $params['arg2'] = $arg2;
                 $params['result'] = doCalculatorOperation($arg1, $arg2, $operation);
+            }
+            break;
+
+        // .................Товары, Корзина, Оформление заказа.................................................
+
+        // Товары
+
+        case 'goods':
+            session_start();
+            $session = session_id();
+            $params['goods'] = getAllCatalog();
+            $id = $_POST['goods_id'];
+            $params['count'] = countGoodsBasketItem($session); // Показ количества товаров в корзине
+
+            if (isset($id)) {
+                addBasket($session, $id);
+                header("Location: /goods");
+                die();
+            }
+            break;
+        case 'goodsItem':
+            session_start();
+            $session = session_id();
+            $id_get = (int)$_GET['id'];
+            $params['goods'] = getOneCatalog($id_get); // Вывоодит информацию о товаре
+            $params['feedback'] = getItemFeedback($id_get);  // Показывает отзывы
+            $params['count'] = countGoodsBasketItem($session); // Показ количества товаров в корзине
+            $id = $_POST['goods_id'];
+            if (isset($_POST['goods_id'])) {
+                addBasket($session, $id);
+                $params['ok'] = $_SESSION['name'];
+                // Пытался вывести собщение но из-за header оно сразу пропадает
+                // $_SESSION['name'] = 'Товар успешно добавлен в корзину';
+                // unset($_SESSION['name']);
+                header("Location: /goodsItem/?id={$id}");
+            }
+            break;
+
+        // Корзина
+
+        case 'basket':
+            session_start();
+            $session = session_id();//
+            $params['count'] = countGoodsBasketItem($session);
+            $params['basket'] = getBasketItem($session); // вывод товаров в корзине
+            $params['summ'] = getSumBasket($session); // сумма товаров
+
+            // Удаление
+
+            $id = (int)$_GET['id'];
+            $session_id = $_GET['session'];
+            if (($_GET['action'] == 'delete') && ($session_id == "$session") ){
+                deleteBasketItem($id);
+                header("Location: /basket");
+            }
+
+            break;
+
+        // Страница с успешно оформленным заказом
+
+        case 'congratulations':
+            session_start();
+            $session = session_id();
+            $tel = $_POST['tel'];
+            $email = $_POST['email'];
+
+            if (isset($tel) && isset($email)) {
+                pushOrder($session, $tel, $email);
             }
             break;
 

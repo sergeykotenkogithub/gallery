@@ -11,3 +11,7 @@ function getBasketItem($session) {
 function countGoodsBasketItem($session) {
     return getOneResult("SELECT count(id) as count FROM basket WHERE session_id = '{$session}' ");
 }
+
+function getSumBasket($session) {
+    return getOneResult("SELECT SUM(goods.price) as summ FROM basket, goods WHERE basket.goods_id = goods.id AND session_id = '{$session}'");
+}

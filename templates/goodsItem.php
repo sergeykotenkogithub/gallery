@@ -9,9 +9,11 @@
             </div>
             <div><?=$goods['description']?> </div>
             <div class="rub catalogItemPrice">Цена:<?=$goods['price']?></div>
-            <button type="submit" class="buy">КУПИТЬ</button>
+            <div class="buySubmit">
+                <button type="submit" class="buy">КУПИТЬ</button>
+                <div> <?=$ok?></div>
+            </div>
         </form>
-
         <div class="feedbackCatalog">
             <h2>Отзывы:</h2>
             <div> <?=$feedback['name']?> : <?=$feedback['feedback']?></div>
