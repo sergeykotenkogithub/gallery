@@ -21,3 +21,11 @@ function addBasket($session, $id) {
     $sql = "INSERT INTO basket (session_id, goods_id) VALUE ('{$session}', '{$id}') ";
     return getOneResultInto($sql);
 }
+
+
+function addBasketItem () {
+
+}
+
+
+

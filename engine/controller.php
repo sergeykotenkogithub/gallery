@@ -122,12 +122,33 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $id = $_POST['goods_id'];
             $params['count'] = countGoodsBasketItem($session); // Показ количества товаров в корзине
 
+            // Добавление товара в корзину, если есть такой то увеличивает количество
+
+            addBasketItem();
+
             if (isset($id)) {
-                addBasket($session, $id);
-                header("Location: /goods");
-                die();
+                $getBasket = getBasket();
+                $cc = [];
+                foreach ($getBasket as $items ) {
+                    $goods_id = $items['goods_id'];
+                    $session_id = $items['session_id'];
+                    $cc[] = $goods_id;
+                    $cc[] = $session_id;
+
+                }
+                if(in_array($session, $cc) && in_array($id, $cc)) {
+                    changeBasketQuantity($id);
+                    header("Location: /goods");
+                    die();
+                }
+                else {
+                    addBasket($session, $id);
+                    header("Location: /goods");
+                    die();
+                }
             }
             break;
+
         case 'goodsItem':
             session_start();
             $session = session_id();
@@ -137,11 +158,13 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $params['count'] = countGoodsBasketItem($session); // Показ количества товаров в корзине
             $id = $_POST['goods_id'];
             if (isset($_POST['goods_id'])) {
-                addBasket($session, $id);
-                $params['ok'] = $_SESSION['name'];
+                addBasket($session, $id);//
+
                 // Пытался вывести собщение но из-за header оно сразу пропадает
                 // $_SESSION['name'] = 'Товар успешно добавлен в корзину';
+                //                $params['ok'] = $_SESSION['name'];
                 // unset($_SESSION['name']);
+
                 header("Location: /goodsItem/?id={$id}");
             }
             break;

@@ -9,6 +9,7 @@
             <img src="/img/goods/<?= $item['image'] ?>" width="100">
         </div>
         <div class="rub basket__price"><?=$item['price']?></div>
+        <div class="basket__quantity">Кол-во:<?=$item['quantity']?></div>
         <div class="basket__del" >
             <a class="buy" href="/basket/?action=delete&id=<?=$item['basket_id']?>&session=<?=$item['session_id']?>">Удалить</a>
         </div>

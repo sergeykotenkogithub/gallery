@@ -17,6 +17,8 @@ function getDb() {
  * Возврат нескольких записей в виде массива
  */
 
+// Для вывода всех результатов
+
 function getAssocResult($sql) {
     $result = @mysqli_query(getDb(), $sql) or die(mysqli_error(getDb()));
     $array_result = [];
