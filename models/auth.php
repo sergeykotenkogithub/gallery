@@ -11,7 +11,7 @@ function isAuth() {
         $sql = "SELECT * FROM users WHERE hash = '{$hash}'";
         $result = mysqli_query(getDb(), $sql);
         if ($result) {
-            $row = mysql_fetch_assoc($result);
+            $row = mysqli_fetch_assoc($result);
             $user = $row['login'];
             if (!empty($user)) {
                 $_SESSION['login'] = $user;
