@@ -121,9 +121,16 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             }
             break;
         case 'goodsItem':
+            session_start();
+            $session = session_id();
+//            var_dump($_REQUEST);
             $id = (int)$_GET['id'];
             $params['goods'] = getOneCatalog($id);
             $params['feedback'] = getItemFeedback($id);
+            $id = $_POST['goods_id'];
+            if (isset($_POST['goods_id'])) {
+                addBasket($session, $id);
+            }
             break;
 
         // Корзина

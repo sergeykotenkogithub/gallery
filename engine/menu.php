@@ -28,12 +28,12 @@ $menu = [
         "href" => "/calcAjax",
     ],
     [
-        "title" => "Goods",
-        "href" => "/goods",
-    ],
-    [
         "title" => "Feedback",
         "href" => "/feedback",
+    ],
+    [
+        "title" => "Goods",
+        "href" => "/goods",
     ],
     [
         "title" => "Basket",

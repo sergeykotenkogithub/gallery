@@ -1,5 +1,3 @@
-
-
 <div class="welcome">
     <? if ($auth): ?>
         <?=$hello?> <?= $name ?> <?=$welcome?> <a href="/logout"> [Выход]</a>
@@ -11,6 +9,4 @@
             <input type="submit">
         </form>
     <? endif; ?>
-
-
 </div>

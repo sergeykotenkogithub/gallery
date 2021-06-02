@@ -12,7 +12,7 @@ function getOneCatalog($id) {
 }
 
 function getItemFeedback($id) {
-    return getOneResult("SELECT g.name, f.name, f.feedback FROM goods g join feedback f on g.id = f.goods_id WHERE g.id = {$id}");
+    return getOneResult("SELECT g.id, g.name, f.name, f.feedback FROM goods g join feedback f on g.id = f.goods_id WHERE g.id = {$id}");
 }
 
 // Добавление товара в корзину

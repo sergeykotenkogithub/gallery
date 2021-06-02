@@ -172,6 +172,7 @@ li {
 	display: flex;
 	flex-wrap: wrap;
 	padding-left: 0;
+	justify-content: center;
 }
 
 .menu__wrapper li {
@@ -206,7 +207,7 @@ a {
 }
 
 .menu__link a:hover {
-	color: darkgray;
+	color: white;
 }
 
 
@@ -328,12 +329,13 @@ a {
 	padding: 10px;
 	border-radius: 50px;
 	display: inline-block;
-	color: white;
+	color: darkgray;
 	transition: color 0.5s;
+	box-shadow: 2px 4px 0px #ccc;
 }
 
 .buy:hover {
-	color: darkgray;
+	color: white;
 }
 
 
@@ -354,6 +356,7 @@ a {
 	align-items: center;
 	padding: 20px 0;
 	border-radius: 30px;
+	box-shadow: 7px 6px 0px #ccc;
 }
 
 .price {
@@ -365,6 +368,10 @@ a {
 }
 
 .active a{
+	color: white;
+}
+
+.noactive a {
 	color: darkgray;
 }
 
@@ -395,20 +402,21 @@ a {
 }
 
 .order {
-	color: white;
-	transition: color 0.5s;
 	padding: 35px 0 25px 0;
-
-}
-
-.order:hover {
-	color: darkgray;
 }
 
 .order a {
 	padding: 10px;
-	border: 1px solid white;
+	border: 1px solid darkgray;
 	border-radius: 50px;
+	transition: color 0.5s;
+	color: darkgray;
+	box-shadow: 2px 4px 0px #ccc;
+}
+
+.order a:hover {
+	color: white;
+	border: 1px solid white;
 }
 
 .orderBuy form {
@@ -427,16 +435,13 @@ a {
 	font-size: 16px;
 	border: 1px solid white;
 	padding: 5px 25px;
+	margin: 20px;
 }
 
 .thanks {
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-}
-
-.thanks div {
-
 }
 
 .thanks__ok{
