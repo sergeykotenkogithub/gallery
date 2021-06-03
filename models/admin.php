@@ -9,7 +9,7 @@ function adminOrderItem($id) {
 }
 
 function adminOrderTotal($id) {
-    return getOneResult("SELECT SUM(goods.price) as `summ` FROM basket,orders,goods WHERE basket.session_id = orders.hash AND orders.id = '{$id}' AND basket.goods_id = goods.id");
+    return getOneResult("SELECT SUM(basket.price) as `summ` FROM basket,orders,goods WHERE basket.session_id = orders.hash AND orders.id = '{$id}' AND basket.goods_id = goods.id");
 }
 
 //function getBasketItem($session) {

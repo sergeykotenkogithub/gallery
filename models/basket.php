@@ -26,7 +26,7 @@ function getBasket() {
 ////////
 ///
 function changeBasketQuantity($id) {
-    return getOneResultInto("UPDATE `basket` SET `quantity` = quantity + 1, price = price + price WHERE `goods_id` = {$id};");
+    return getOneResultInto("UPDATE `basket` SET `quantity` = quantity + 1, price = price + price_origin WHERE `goods_id` = {$id};");
 }
 
 function addBasketItem($id) {
