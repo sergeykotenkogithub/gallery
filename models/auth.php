@@ -21,12 +21,30 @@ function isAuth() {
     return isset($_SESSION['login']);
 }
 
+// Проверка для входа
+function loginEnter ($login, $pass) {
+    if (auth($login, $pass)) {
+        if (isset($_POST['save'])) {
+            $hash = uniqid(rand(), true);
+            $id = $_SESSION['id'];
+            $sql = "UPDATE users SET hash = '{$hash}' WHERE id = {$id}";
+            $result = mysqli_query(getDb(), $sql);
+            setcookie("hash", $hash, time() +3600, "/");
+        }
+        header("Location: /");
+        die();
+    } else {
+        die("Не верный логин пароль");
+    }
+}
+
+
 function auth($login, $pass) {
     $login = mysqli_real_escape_string(getDb(), strip_tags(stripslashes($login)));
     $result = mysqli_query(getDb(), "SELECT * FROM users WHERE login = '{$login}' ");
     if ($result) {
         $row = mysqli_fetch_assoc($result);
-        if ($pass == $row['pass']) {
+        if (password_verify($pass, $row['pass'])) {
             //Авторизация
             $_SESSION['login'] = $login;
             $_SESSION['id'] = $row['id'];
@@ -35,3 +53,4 @@ function auth($login, $pass) {
     }
     return false;
 }
+

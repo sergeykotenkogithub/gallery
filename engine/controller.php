@@ -22,23 +22,9 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         // .................Авторизация.................................................
 
         case 'login':
-//            $login = $_POST['login'];
-//            $login = strip_tags(htmlspecialchars(mysqli_real_escape_string($_POST['login'])));
-            $login = $_POST['login'];
-            $pass = $_POST['pass'];
-            if (auth($login, $pass)) {
-                if (isset($_POST['save'])) {
-                    $hash = uniqid(rand(), true);
-                    $id = $_SESSION['id'];
-                    $sql = "UPDATE users SET hash = '{$hash}' WHERE id = {$id}";
-                    $result = mysqli_query(getDb(), $sql);
-                    setcookie("hash", $hash, time() +3600, "/");
-                }
-                header("Location: /");
-                die();
-            } else {
-                die("Не верный логин пароль");
-            }
+            $login = strip_tags(htmlspecialchars(($_POST['login'])));
+            $pass = strip_tags(htmlspecialchars(($_POST['pass'])));
+            loginEnter($login, $pass);
         break;
         case 'logout':
             setcookie("hash", "", time()-1, "/" );
@@ -52,6 +38,14 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
         case 'admin':
             $params['order'] = adminOrder();
+            break;
+
+        // Админ страница с определённым заказом
+
+        case 'adminOrder':
+            $id = (int)$_GET['id'];
+            $params['order'] = adminOrderItem($id);
+            $params['summ'] = adminOrderTotal($id);
             break;
 
 
@@ -162,6 +156,8 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
             break;
 
+        // Подробное описание товара
+
         case 'goodsItem':
             session_start();
             $session = session_id();
@@ -218,17 +214,6 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
                 pushOrder($session, $tel, $email);
                 session_regenerate_id();
             }
-            break;
-
-        // Админ страница с определённым заказом
-
-        case 'adminOrder':
-            $id = (int)$_GET['id'];
-           $params['order'] = adminOrderItem($id);
-           $params['summ'] = adminOrderTotal($id);
-//           $total = adminOrderTotal($id);
-//           $ccs = adminOrderItem($id);
-//           var_dump($total);
             break;
 
         // .................API.................................................
