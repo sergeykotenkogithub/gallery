@@ -22,6 +22,11 @@ function addBasket($session, $id) {
     return getOneResultInto($sql);
 }
 
+function comparisonGoodsBasket($id, $session) {
+    $sql = "SELECT goods_id FROM basket where goods_id = '{$id}' AND session_id = '{$session}'";
+    return getAssocResult($sql);
+}
+
 
 //function addBasketItem ($id) {
 //

@@ -128,30 +128,19 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             // Добавление товара в корзину, если есть такой то увеличивает количество
             if (isset($id)) {
 
-                addBasket($session, $id);
-                header("Location: /goods");
-                die();
+                $comparisonGoodsBasket = comparisonGoodsBasket($id, $session);
 
-//                !!Пытался реализовать количество товаров но не вышло, почему не могу понять. если есть такой товар он добавляет в корзину и количество увеличивается, а если нет, то ничего не происходит почему-то, хотя я же поставил условие else ???
-//                $getBasket = getBasket();
-//                $cc = [];
-//                foreach ($getBasket as $items ) {
-//                    $goods_id = $items['goods_id'];
-//                    $session_id = $items['session_id'];
-//                    $cc[] = $goods_id;
-//                    $cc[] = $session_id;
-//
-//                }
-//                if (in_array($session, $cc) && in_array($id, $cc)) {
-//                    changeBasketQuantity($id);
-//                    header("Location: /goods");
-//                    die();
-//                }
-//                else  {
-//                    addBasket($session, $id);
-//                    header("Location: /goods");
-//                    die();
-//                }
+                // Сравнение товара с базой данных в basket
+
+                if ($comparisonGoodsBasket) {
+                    changeBasketQuantity($id);
+                    header("Location: /goods");
+                    die();
+                }   else {
+                    addBasket($session, $id);
+                    header("Location: /goods");
+                    die();
+                }
             }
 
             break;
@@ -195,7 +184,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
             $id = (int)$_GET['id'];
             $session_id = $_GET['session'];
-            if (($_GET['action'] == 'delete') && ($session_id == "$session") ){
+            if (($_GET['action'] == 'delete') && ($session_id == $session) ){
                 deleteBasketItem($id);
                 header("Location: /basket");
             }
@@ -213,6 +202,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             if (isset($tel) && isset($email)) {
                 pushOrder($session, $tel, $email);
                 session_regenerate_id();
+                session_destroy();
             }
             break;
 
