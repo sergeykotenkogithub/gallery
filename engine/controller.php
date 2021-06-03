@@ -123,6 +123,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $session = session_id();
             $params['goods'] = getAllCatalog();
             $id = $_POST['goods_id'];
+            $price = $_POST['price'];
             $params['count'] = countGoodsBasketItem($session); // Показ количества товаров в корзине
 
             // Добавление товара в корзину, если есть такой то увеличивает количество
@@ -131,13 +132,14 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
                 $comparisonGoodsBasket = comparisonGoodsBasket($id, $session);
 
                 // Сравнение товара с базой данных в basket
+//                var_dump($price);
 
                 if ($comparisonGoodsBasket) {
                     changeBasketQuantity($id);
                     header("Location: /goods");
                     die();
                 }   else {
-                    addBasket($session, $id);
+                    addBasket($session, $id, $price);
                     header("Location: /goods");
                     die();
                 }
@@ -179,16 +181,29 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $params['count'] = countGoodsBasketItem($session);
             $params['basket'] = getBasketItem($session); // вывод товаров в корзине
             $params['summ'] = getSumBasket($session); // сумма товаров
-
+            $quantity = $_GET['quantity'];
             // Удаление
 
             $id = (int)$_GET['id'];
             $session_id = $_GET['session'];
             if (($_GET['action'] == 'delete') && ($session_id == $session) ){
-                deleteBasketItem($id);
+                deleteBasketItemAll($id);
                 header("Location: /basket");
             }
-
+            if (($_GET['action'] == 'add') && ($session_id == $session) ){
+                addBasketItem($id);
+                header("Location: /basket");
+            }
+            if (($_GET['action'] == 'deleteitem') && ($session_id == $session) ){
+                if ($quantity < 2) {
+                    deleteBasketItemAll($id);
+                    header("Location: /basket");
+                }
+                else {
+                    deleteBasketItem($id);
+                    header("Location: /basket");
+                }
+            }
             break;
 
         // Страница с успешно оформленным заказом
