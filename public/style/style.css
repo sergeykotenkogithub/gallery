@@ -1,5 +1,5 @@
 body {
-	background: #444 url('../img/body.jpg');
+	/*background: #444 url('../img/body.jpg');*/
 	color: #444;
 	font: normal 1.2em Verdana,Arial,sans-serif;
 	height: 100%;
@@ -186,7 +186,6 @@ a {
 }
 
 .welcome {
-	display: flex;
 	width: 858px;
 	margin: 20px auto;
 	border-radius: 10px;
@@ -194,9 +193,12 @@ a {
 	padding: 10px;
 	box-sizing: border-box;
 	justify-content: center;
-	height: 300px;
 	align-items: center;
 	color: white;
+}
+
+.loginform {
+	display: flex;
 }
 
 .menu__link {
@@ -560,4 +562,25 @@ a {
 	border: 1px solid white;
 	/* padding: 5px 25px; */
 	margin: 8px;
+}
+
+.imgChange {
+	border: 1px solid white;
+	width: 200px;
+	height: 200px;
+	margin:0 20px 20px 20px;
+}
+
+.imgChange img {
+	width: 200px;
+	height: 200px;
+}
+
+.imgIndexWrapper {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.changeTheme {
+	margin-bottom: 20px;
 }

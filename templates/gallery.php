@@ -18,7 +18,6 @@
 
 <div id="main">
     <div class="post_title"><h2>My Gallery</h2></div>
-
     <div class="gallery">
         <?php foreach ($gallery as $item): ?>
         <div class="imgWrapper">

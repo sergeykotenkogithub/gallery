@@ -16,6 +16,14 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
     // Выбор шаблона по умолчанию
     $params['layout'] = "main";
 
+    if (isset($_COOKIE['color']))
+    {
+        $params['add'] = $_COOKIE['color'];
+    }
+    else {
+        $params['add'] = "1.css";
+    }
+
     //Переменные для страниц
     switch ($page) {
 
@@ -54,9 +62,12 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         // Начальная страница
 
         case 'index':
+
             $params['hello'] = 'Hello,';
             $params['welcome'] = 'Welcome !';
             $params['title'] = 'Hello';
+            $background = $_GET['action'];
+            changeThemeAction($background); // Изменение темы
             break;
 
         // Отзывы
@@ -161,12 +172,6 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
             if (isset($_POST['goods_id'])) {
                 addBasket($session, $id);//
-
-                // Пытался вывести собщение но из-за header оно сразу пропадает
-
-//                $_SESSION['name'] = 'Товар успешно добавлен в корзину';
-//                $params['ok'] = $_SESSION['name'];
-                // unset($_SESSION['name']);
 
                 header("Location: /goodsItem/?id={$id}");
             }

@@ -19,5 +19,6 @@ function render ($page, $params) {
         'content' => renderTemplate($page, $params),
         'title' => $params['title'],  // Заголок который находится в main.php
         'gall' => $params['gall'],
+        'add' => $params['add']
     ]);
 }

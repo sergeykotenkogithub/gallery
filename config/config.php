@@ -45,7 +45,8 @@ include ROOT . "/models/calculator.php"; // Калькулятор
 include ROOT . "/models/auth.php"; // Калькулятор
 include ROOT . "/models/basket.php"; // Корзина
 include ROOT . "/models/order.php"; // Заказы
-include ROOT . "/models/admin.php"; // Заказы
+include ROOT . "/models/admin.php"; // Админ
+include ROOT . "/models/changeTheme.php"; // Заказы
 
 // Всё что относится к модели: "gallery"
 
