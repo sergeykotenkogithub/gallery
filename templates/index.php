@@ -1,8 +1,12 @@
 <div class="welcome">
 
-    <? if ($auth): ?>
+    <? if ($auth2): ?>
     <div class="$auth">
         <?=$hello?> <?= $name ?> <?=$welcome?> <a class="btnAll" href="/logout">Выход</a>
+    </div>
+    <? elseif ($auth): ?>
+    <div class="$auth">
+        <?=$hello?> <?= $name_admin ?> <?=$welcome?> <a class="btnAll" href="/logout">Выход</a>
     </div>
     <? else: ?>
         <div>

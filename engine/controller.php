@@ -11,7 +11,10 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
     // Авторизация
     $params['name'] = get_user();
+    $params['name_admin'] = get_admin();
     $params['auth'] = isAuth();
+    $params['auth2'] = isAuth2();
+    $params['myorders'] = $_SESSION['id'];
 
     // Выбор шаблона по умолчанию
     $params['layout'] = "main";
@@ -21,11 +24,18 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         $params['add'] = $_COOKIE['color'];
     }
     else {
-        $params['add'] = "1.css";
+        $params['add'] = "2.css";
     }
 
     //Переменные для страниц
     switch ($page) {
+
+        case 'myorders':
+            $id = (int)$_GET['id'];
+//            $params['order'] = getMyorders($id);
+            $params['order'] = count(getMyorders($id)) + 1;
+            break;
+
 
         // .................Авторизация.................................................
 
@@ -36,6 +46,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         break;
         case 'logout':
             setcookie("hash", "", time()-1, "/" );
+            session_unset();
             session_regenerate_id();
             session_destroy();
             header("Location: /");
@@ -62,6 +73,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         // Начальная страница
 
         case 'index':
+//            var_dump($_SESSION['id']);
             $params['hello'] = 'Hello,';
             $params['welcome'] = 'Welcome !';
             $params['title'] = 'Hello';
@@ -208,12 +220,22 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $session = session_id();
             $tel = $_POST['tel'];
             $email = $_POST['email'];
+            $id = $_SESSION['id'];
 
             if (isset($tel) && isset($email)) {
-                pushOrder($session, $tel, $email);
-                session_regenerate_id();
-                session_destroy();
+                if (isset($id)) {
+                    pushAuthOrder($session, $tel, $email, $id);
+                    session_regenerate_id();
+                }
+                else {
+                    pushOrder($session, $tel, $email);
+                    session_regenerate_id();
+                    session_destroy();
+                }
+
+              ;
             }
+
             break;
 
         // .................API.................................................
