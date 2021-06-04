@@ -1,13 +1,21 @@
 <div class="welcome">
 
+    <!--  Показывается для зарегестрированого пользователя  -->
+
     <? if ($auth2): ?>
     <div class="$auth">
         <?=$hello?> <?= $name ?> <?=$welcome?> <a class="btnAll" href="/logout">Выход</a>
     </div>
+
+    <!-- Показывается для админа   -->
+
     <? elseif ($auth): ?>
     <div class="$auth">
         <?=$hello?> <?= $name_admin ?> <?=$welcome?> <a class="btnAll" href="/logout">Выход</a>
     </div>
+
+    <!--  Показывается для незарегестрированого или кто не вошёл  -->
+
     <? else: ?>
         <div>
             <div>
@@ -38,7 +46,10 @@
 
     <? endif; ?>
 
+    <!-- Изменение темы   -->
+
     <div class="changeTheme">Сменить тему:</div>
+
     <div>
         <div class="imgIndexWrapper">
 
@@ -51,6 +62,6 @@
             <?endfor;?>
 
         </div>
-
     </div>
+
 </div>

@@ -7,23 +7,18 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
     // $params для указания переменной на всех страницах
 
     $params = [
+        // Отображение меню
         'list' => getMenu($menu),
-
         // Авторизация
-        'name' => get_user()
+        'name' => get_user(),
+        'name_admin' =>  get_admin(),
+        // Показывать меню для админа и для клиента
+        'auth' => isAuth(),
+        'auth2' => isAuth2(),
+        'myorders' => $_SESSION['id'],
+        // Выбор основного шаблона из папки layout по умолчанию
+        'layout' => "main"
     ];
-
-    // Авторизация
-
-//    $params['name'] = get_user();
-    $params['name_admin'] = get_admin();
-    $params['auth'] = isAuth();
-    $params['auth2'] = isAuth2();
-    $params['myorders'] = $_SESSION['id'];
-
-    // Выбор шаблона по умолчанию
-
-    $params['layout'] = "main";
 
     // Смена темы
 
@@ -35,7 +30,6 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         $params['add'] = "2.css";
     }
 
-
     // Показывает количество товаров в корзине
 
     $session = session_id();
@@ -43,17 +37,15 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
     $count = (($countBasket['count'])) ?: 0;
     $params['count'] = $count;
 
-
     //Переменные для страниц
+
     switch ($page) {
 
         case 'myorders':
             $id = (int)$_GET['id'];
             $params['order'] = getMyorders($id);
             $params['count_orders'] = count(getMyorders($id)) + 1;
-//            var_dump(count(getMyorders($id)) + 1);
-            break;
-
+        break;
 
         // .................Авторизация.................................................
 
@@ -92,7 +84,6 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         // Начальная страница
 
         case 'index':
-//            var_dump($_SESSION['id']);
             $params['hello'] = 'Hello,';
             $params['welcome'] = 'Welcome !';
             $params['title'] = 'Hello';
@@ -169,10 +160,9 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             // Добавление товара в корзину, если есть такой то увеличивает количество
             if (isset($id)) {
 
-                $comparisonGoodsBasket = comparisonGoodsBasket($id, $session);
-
                 // Сравнение товара с базой данных в basket
-//                var_dump($price);
+
+                $comparisonGoodsBasket = comparisonGoodsBasket($id, $session);
 
                 if ($comparisonGoodsBasket) {
                     changeBasketQuantity($id);
@@ -185,7 +175,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
                 }
             }
 
-            break;
+        break;
 
         // Подробное описание товара
 
@@ -215,7 +205,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
                     die();
                 }
             }
-            break;
+        break;
 
         // Корзина
 
@@ -227,7 +217,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $quantity = $_GET['quantity'];
             $id = (int)$_GET['id'];
             doBasketAction($id, $session, $quantity);
-            break;
+        break;
 
         // Страница с успешно оформленным заказом
 
@@ -252,7 +242,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
               ;
             }
 
-            break;
+        break;
 
         // .................API.................................................
 
@@ -267,7 +257,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             header("Content-type: application/json");
             echo json_encode(doCalculatorOperation($arg1, $arg2, $operation));
             die();
-            break;
+        break;
     }
     return $params;
 }
