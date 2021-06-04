@@ -1,5 +1,5 @@
 <div class="container">
-    Товаров в корзине: <?=$count['count']?>
+    Товаров в корзине: <?=$count?>
     <br>
     <br>
     <?php foreach ($basket as $item): ?>

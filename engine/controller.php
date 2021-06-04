@@ -5,19 +5,27 @@
 function prepareVariables($page, $menu, $messageUpload, $getImages, $action = "", $giveFile) {
 
     // $params для указания переменной на всех страницах
+
     $params = [
         'list' => getMenu($menu),
+
+        // Авторизация
+        'name' => get_user()
     ];
 
     // Авторизация
-    $params['name'] = get_user();
+
+//    $params['name'] = get_user();
     $params['name_admin'] = get_admin();
     $params['auth'] = isAuth();
     $params['auth2'] = isAuth2();
     $params['myorders'] = $_SESSION['id'];
 
     // Выбор шаблона по умолчанию
+
     $params['layout'] = "main";
+
+    // Смена темы
 
     if (isset($_COOKIE['color']))
     {
@@ -27,13 +35,22 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         $params['add'] = "2.css";
     }
 
+
+    // Показывает количество товаров в корзине
+
+    $session = session_id();
+    $countBasket = countGoodsBasketItem($session);
+    $count = (($countBasket['count'])) ?: 0;
+    $params['count'] = $count;
+
+
     //Переменные для страниц
     switch ($page) {
 
         case 'myorders':
             $id = (int)$_GET['id'];
             $params['order'] = getMyorders($id);
-            $params['count'] = count(getMyorders($id)) + 1;
+            $params['count_orders'] = count(getMyorders($id)) + 1;
 //            var_dump(count(getMyorders($id)) + 1);
             break;
 
@@ -148,7 +165,6 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $params['goods'] = getAllCatalog();
             $id = $_POST['goods_id'];
             $price = $_POST['price'];
-            $params['count'] = countGoodsBasketItem($session); // Показ количества товаров в корзине
 
             // Добавление товара в корзину, если есть такой то увеличивает количество
             if (isset($id)) {
@@ -179,7 +195,6 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $id_get = (int)$_GET['id'];
             $params['goods'] = getOneCatalog($id_get); // Вывоодит информацию о товаре
             $params['feedback'] = getItemFeedback($id_get);  // Показывает отзывы
-            $params['count'] = countGoodsBasketItem($session); // Показ количества товаров в корзине
             $price = $_POST['price'];
             $id = $_POST['goods_id'];
 
@@ -206,8 +221,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
         case 'basket':
             session_start();
-            $session = session_id();//
-            $params['count'] = countGoodsBasketItem($session);
+//            $session = session_id();//
             $params['basket'] = getBasketItem($session); // вывод товаров в корзине
             $params['summ'] = getSumBasket($session); // сумма товаров
             $quantity = $_GET['quantity'];

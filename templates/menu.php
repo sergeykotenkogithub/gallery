@@ -1,13 +1,6 @@
 <menu class="menu">
     <?=$list?>
-    <div class="countBasket">
-        (<? if ($count['count']) {
-            echo $count['count'];
-        }  else {
-            echo  0;
-        }
-        ?>
-        )</div>
+    <div class="countBasket">(<? echo $count ?>)</div>
     <? if ($auth):?>
     <div class="adminPanel"><a href="/admin">Admin Panel</a> </div>
     <? elseif ($auth2):?>
