@@ -1,6 +1,12 @@
 <div class="container">
     <?php if ($auth): ?>
+        <div class="status__order_admin">
+            <div> Статус: <?=$status['status']?> </div>
+            <a href="/"><div>Изменить</div></a>
+        </div>
+
       <? foreach ($order as $item):?>
+
             <div class="basket">
                 <div class="basket__name"><?=$item['name']?> </div>
                 <div>

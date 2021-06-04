@@ -66,6 +66,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $id = (int)$_GET['id'];
             $params['order'] = adminOrderItem($id);
             $params['summ'] = adminOrderTotal($id);
+            $params['status'] = adminOrderStatus($id);
             break;
 
 

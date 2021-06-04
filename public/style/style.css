@@ -586,5 +586,19 @@ a {
 }
 
 .myorder {
+	padding: 20px;
+	text-align: center;
+}
+
+.status__order {
+	padding: 20px 0;
+}
+
+.status__order_admin {
 	display: flex;
+	padding: 20px 0;
+}
+
+.status__order_admin div {
+	padding-right: 15px;
 }
