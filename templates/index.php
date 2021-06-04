@@ -5,17 +5,33 @@
         <?=$hello?> <?= $name ?> <?=$welcome?> <a class="btnAll" href="/logout">Выход</a>
     </div>
     <? else: ?>
-        <div>Вход:</div>
-        <div class="loginform">
-            <form class="login" action="/login" method="post">
-                <input class="login__text" type="text" name="login" placeholder="Login">
-                <input class="login__text" type="text" name="pass" placeholder="Password">
-                <div class="save">
-                   <div>Save</div><input class="login__checkbox" type="checkbox" name="save">
+        <div>
+            <div>
+                <div>Вход:</div>
+                <div class="loginform">
+                    <form class="login" action="/login" method="post">
+                        <input class="login__text" type="text" name="login" placeholder="Login">
+                        <input class="login__text" type="text" name="pass" placeholder="Password">
+                        <div class="save">
+                            <div>Save</div><input class="login__checkbox" type="checkbox" name="save">
+                        </div>
+                        <input class="login__submit" type="submit">
+                    </form>
                 </div>
-                <input class="login__submit" type="submit">
-            </form>
+            </div>
+
+            <div>
+                <div>Регистрация:</div>
+                <div class="loginform">
+                    <form class="login" action="/login" method="post">
+                        <input class="login__text" type="text" name="login" placeholder="Login">
+                        <input class="login__text" type="text" name="pass" placeholder="Password">
+                        <input class="login__submit" type="submit">
+                    </form>
+                </div>
+            </div>
         </div>
+
     <? endif; ?>
 
     <div class="changeTheme">Сменить тему:</div>

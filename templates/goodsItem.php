@@ -3,6 +3,7 @@
 <!--        <form action="/goodsItem/?id=1" method="post">-->
         <form action="/goodsItem/?id=<?=$goods['id']?>" method="post">
             <input hidden type="text" name="goods_id" value="<?=$goods['id']?>">
+            <input hidden type="text" name="price" value="<?=$goods['price']?>">
             <h2><?=$goods['name']?></h2>
             <div class="catalogItemImg">
                 <img  src="/img/goods/<?=$goods['image']?>">

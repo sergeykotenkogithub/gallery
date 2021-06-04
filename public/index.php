@@ -24,7 +24,7 @@ if ($url_array[1] == "") {
 
 // Переход в контролер
 
-$params = prepareVariables($page, $menu, $messageUpload, $getImages, $action);
+$params = prepareVariables($page, $menu, $messageUpload, $getImages, $action, $giveFile);
 
 // .................................................................................
 
