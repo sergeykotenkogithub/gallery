@@ -584,3 +584,7 @@ a {
 .changeTheme {
 	margin-bottom: 20px;
 }
+
+.myorder {
+	display: flex;
+}
