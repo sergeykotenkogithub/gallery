@@ -32,8 +32,9 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
         case 'myorders':
             $id = (int)$_GET['id'];
-//            $params['order'] = getMyorders($id);
-            $params['order'] = count(getMyorders($id)) + 1;
+            $params['order'] = getMyorders($id);
+            $params['count'] = count(getMyorders($id)) + 1;
+//            var_dump(count(getMyorders($id)) + 1);
             break;
 
 
