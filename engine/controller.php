@@ -60,6 +60,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         break;
         case 'logout':
             setcookie("hash", "", time()-1, "/" );
+            setcookie("adminhash", "", time()-1, "/" );
             session_unset();
             session_regenerate_id();
             session_destroy();

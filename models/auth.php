@@ -10,7 +10,7 @@ function get_admin()
 }
 
 function isAuth() {
-    if (isset($_COOKIE['hash'])) {
+    if (isset($_COOKIE['hash']) && !isset($_SESSION['login'])) {
         $hash = $_COOKIE["hash"];
         $sql = "SELECT * FROM users WHERE hash = '{$hash}'";
         $result = mysqli_query(getDb(), $sql);
@@ -19,6 +19,20 @@ function isAuth() {
             $user = $row['login'];
             if (!empty($user)) {
                 $_SESSION['login'] = $user;
+                return 1;
+            }
+        }
+    }
+    elseif (isset($_COOKIE['adminhash']) && !isset($_SESSION['admin'])) {
+        $hash = $_COOKIE["adminhash"];
+        $sql = "SELECT * FROM users WHERE hash = '{$hash}'";
+        $result = mysqli_query(getDb(), $sql);
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $user = $row['login'];
+            if (!empty($user)) {
+                $_SESSION['admin'] = $user;
+                return 2;
             }
         }
     }
@@ -38,7 +52,14 @@ function loginEnter ($login, $pass) {
             $id = $_SESSION['id'];
             $sql = "UPDATE users SET hash = '{$hash}' WHERE id = {$id}";
             $result = mysqli_query(getDb(), $sql);
-            setcookie("hash", $hash, time() +3600, "/");
+            $result2 = mysqli_query(getDb(), "SELECT * FROM users WHERE login = '{$login}' AND id = 1");
+            $row = mysqli_fetch_assoc($result2);
+             if ($row)   {
+                 setcookie("adminhash", $hash, time() +3600, "/");
+             }
+             else {
+                 setcookie("hash", $hash, time() +3600, "/");
+             }
         }
         header("Location: /");
         die();
