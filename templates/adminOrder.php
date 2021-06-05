@@ -1,5 +1,5 @@
 <div class="container">
-    <?php if ($auth): ?>
+    <?php if ($admin): ?>
         <div class="status__order_admin">
             <div> Статус: <?=$status['status']?> </div>
             <a href="/"><div>Изменить</div></a>

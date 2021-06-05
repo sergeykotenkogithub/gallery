@@ -41,6 +41,8 @@ function getOneResultInto($sql) {
 // Количество строк в запросе update, delete итд
 
 function executeSql($sql) {
+//    $result = mysqli_query(getDb(), $sql) or die(mysqli_error(getDb()));
+//    return mysqli_affected_rows(getDb());
     $result = mysqli_query(getDb(), $sql) or die(mysqli_error(getDb()));
-    return mysqli_affected_rows(getDb());
+    return mysqli_fetch_assoc($result);
 }

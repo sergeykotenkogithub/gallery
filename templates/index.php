@@ -2,14 +2,14 @@
 
     <!--  Показывается для зарегестрированого пользователя  -->
 
-    <? if ($auth2): ?>
+    <? if ($auth): ?>
     <div class="$auth">
         <?=$hello?> <?= $name ?> <?=$welcome?> <a class="btnAll" href="/logout">Выход</a>
     </div>
 
     <!-- Показывается для админа   -->
 
-    <? elseif ($auth): ?>
+    <? elseif ($admin): ?>
     <div class="$auth">
         <?=$hello?> <?= $name_admin ?> <?=$welcome?> <a class="btnAll" href="/logout">Выход</a>
     </div>
@@ -17,9 +17,9 @@
     <!--  Показывается для незарегестрированого или кто не вошёл  -->
 
     <? else: ?>
-        <div>
+        <div class="main__wrapper">
             <div>
-                <div>Вход:</div>
+                <div class="main__name">Вход:</div>
                 <div class="loginform">
                     <form class="login" action="/login" method="post">
                         <input class="login__text" type="text" name="login" placeholder="Login">
@@ -33,9 +33,9 @@
             </div>
 
             <div>
-                <div>Регистрация:</div>
+                <div class="main__name">Регистрация:</div>
                 <div class="loginform">
-                    <form class="login" action="/login" method="post">
+                    <form class="login" action="/registration" method="post">
                         <input class="login__text" type="text" name="login" placeholder="Login">
                         <input class="login__text" type="text" name="pass" placeholder="Password">
                         <input class="login__submit" type="submit">

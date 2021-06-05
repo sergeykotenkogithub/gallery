@@ -1,9 +1,9 @@
 <menu class="menu">
     <?=$list?>
     <div class="countBasket">(<? echo $count ?>)</div>
-    <? if ($auth):?>
+    <? if ($admin):?>
     <div class="adminPanel"><a href="/admin">Admin Panel</a> </div>
-    <? elseif ($auth2):?>
+    <? elseif ($auth):?>
     <div class="adminPanel"><a href="/myorders/?id=<?=$myorders?>">My orders</a></div>
     <? endif; ?>
 </menu>

@@ -9,27 +9,6 @@ function get_admin()
     return $_SESSION['admin'];
 }
 
-
-function isAuth2() {
-    if (isset($_COOKIE['hash'])) {
-        $hash = $_COOKIE["hash"];
-        $sql = "SELECT * FROM users WHERE hash = '{$hash}'";
-        $result = mysqli_query(getDb(), $sql);
-        if ($result) {
-            $row = mysqli_fetch_assoc($result);
-            $user = $row['login'];
-            if (!empty($user)) {
-                $_SESSION['login'] = $user;
-            }
-        }
-    }
-    return isset($_SESSION['login']);
-}
-
-
-
-
-
 function isAuth() {
     if (isset($_COOKIE['hash'])) {
         $hash = $_COOKIE["hash"];
@@ -43,8 +22,12 @@ function isAuth() {
             }
         }
     }
-//    return isset($_SESSION['login']);
-    return isset($_SESSION['admin']);
+    elseif (isset($_SESSION['login'])) {
+        return 1;
+    }
+    elseif (isset($_SESSION['admin'])) {
+        return 2;
+    }
 }
 
 // Проверка для входа
@@ -91,3 +74,16 @@ function auth($login, $pass) {
     return false;
 }
 
+// Для региcтрации
+
+function registration($login, $pass) {
+    $sql = "INSERT INTO users (login, `pass`) VALUES('$login', '$pass')";
+    return getOneResultInto($sql);
+
+//    return getOneResultInto("INSERT INTO users (login,`pass`) VALUES('$login')");
+}
+
+function getLogin($login) {
+    $sql = "SELECT * FROM users WHERE login = '{$login}'";
+    return executeSql($sql);
+}

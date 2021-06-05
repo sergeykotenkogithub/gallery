@@ -12,9 +12,11 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         // Авторизация
         'name' => get_user(),
         'name_admin' =>  get_admin(),
-        // Показывать меню для админа и для клиента
-        'auth' => isAuth(),
-        'auth2' => isAuth2(),
+        // Показывать меню для админа или для клиента
+        'admin' => ((isAuth() == 2)),
+        'auth' => ((isAuth() == 1)),
+        // Для отображения меню Myorders авторизированного пользователя.
+        // Сделал переменную в общем шаблоне чтоб на всех страницах было видно это меню
         'myorders' => $_SESSION['id'],
         // Выбор основного шаблона из папки layout по умолчанию
         'layout' => "main"
@@ -41,6 +43,8 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
     switch ($page) {
 
+        // .................My orders .................................................
+
         case 'myorders':
             $id = (int)$_GET['id'];
             $params['order'] = getMyorders($id);
@@ -61,6 +65,24 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             session_destroy();
             header("Location: /");
             die();
+        break;
+
+        // Регистрация
+
+        case 'registration':
+            $login =  strip_tags(htmlspecialchars(($_POST['login'])));
+            $pass = strip_tags(htmlspecialchars(($_POST['pass'])));
+            $pass_hash = password_hash($pass,PASSWORD_DEFAULT);
+            $row = getLogin($login);
+            if (isset($login) && isset($pass)) {
+                if ($row) {
+                    $params['success'] = 'Такой логин уже есть';
+                }
+                else {
+                   registration($login, $pass_hash);
+                   $params['not_success'] = 'Поздравляю! Вы зарегестрировались. ';
+                }
+            }
         break;
 
         // ..................Админ................................................
@@ -183,7 +205,6 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
         case 'goodsItem':
             session_start();
-            $session = session_id();
             $id_get = (int)$_GET['id'];
             $params['goods'] = getOneCatalog($id_get); // Вывоодит информацию о товаре
             $params['feedback'] = getItemFeedback($id_get);  // Показывает отзывы
@@ -198,7 +219,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
                 // Сравнение товара с базой данных в basket
 
                 if ($comparisonGoodsBasket) {
-                    changeBasketQuantity($id);
+                    changeBasketQuantity($id, $session);
                     header("Location: /goodsItem/?id={$id}");
                     die();
                 }   else {
@@ -213,7 +234,6 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
         case 'basket':
             session_start();
-//            $session = session_id();//
             $params['basket'] = getBasketItem($session); // вывод товаров в корзине
             $params['summ'] = getSumBasket($session); // сумма товаров
             $quantity = $_GET['quantity'];

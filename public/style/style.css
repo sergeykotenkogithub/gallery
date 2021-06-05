@@ -386,6 +386,7 @@ a {
 	display: flex;
 	align-items: center;
 	padding: 10px;
+	justify-content: space-evenly;
 }
 
 .basket div {
@@ -579,15 +580,20 @@ a {
 .imgIndexWrapper {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .changeTheme {
-	margin-bottom: 20px;
+	margin: 50px 0px 60px 0;
+	text-align: center;
 }
 
 .myorder {
 	padding: 20px;
 	text-align: center;
+	border: 1px solid white;
+	margin: 35px 0;
+	border-radius: 20px;
 }
 
 .status__order {
@@ -605,4 +611,13 @@ a {
 
 .myorder__total {
 	padding: 30px 0;
+}
+
+.main__wrapper {
+	display: flex;
+	justify-content: space-around;
+}
+
+.main__name {
+	padding: 20px 0;
 }

@@ -1,5 +1,5 @@
 <div class="container">
-    <? if ($auth): ?>
+    <? if ($admin): ?>
         <div>
             <div> <h2>Заказы:</h2> </div>
             <?php foreach ($order as $item):?>
