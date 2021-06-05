@@ -67,7 +67,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
         case 'admin':
             $params['order'] = adminOrder();
-            break;
+        break;
 
         // Админ страница с определённым заказом
 
@@ -76,7 +76,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $params['order'] = adminOrderItem($id);
             $params['summ'] = adminOrderTotal($id);
             $params['status'] = adminOrderStatus($id);
-            break;
+        break;
 
 
         // .................Страницы.................................................
@@ -89,14 +89,14 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $params['title'] = 'Hello';
             $background = $_GET['action'];
             changeThemeAction($background); // Изменение темы
-            break;
+        break;
 
         // Отзывы
 
         case 'feedback':
             doFeedbackAction($action);
             $params['feedback'] = getAllFeedback();
-            break;
+        break;
 
         // Галерея
 
@@ -112,22 +112,24 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             // Удаление и вывод сообщения
             doGalleryAction($action);
             $params['message_del'] =  strip_tags($_GET['message_del']);
-            break;
+        break;
+
         case 'galleryone': // Показывает одну страницу
             $id = (int)$_GET['id'];
             changeViews($id); // Изменение количество просмотров
             $params['gall'] = getOneGallery($id);
-            break;
+        break;
 
         // Новости
 
         case 'news':
             $params['news'] = getNews();
-            break;
+        break;
+
         case 'newsone':
             $id = (int)$_GET['id'];
             $params['news'] = getOneNews($id);
-            break;
+        break;
 
         // Калькуляторы
 
@@ -144,7 +146,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
                 $params['arg2'] = $arg2;
                 $params['result'] = doCalculatorOperation($arg1, $arg2, $operation);
             }
-            break;
+        break;
 
         // .................Товары, Корзина, Оформление заказа.................................................
 
@@ -162,10 +164,10 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
                 // Сравнение товара с базой данных в basket
 
-                $comparisonGoodsBasket = comparisonGoodsBasket($id, $session);
+//                $comparisonGoodsBasket = comparisonGoodsBasket($id, $session);
 
-                if ($comparisonGoodsBasket) {
-                    changeBasketQuantity($id);
+                if (comparisonGoodsBasket($id, $session)) {
+                    changeBasketQuantity($id, $session);
                     header("Location: /goods");
                     die();
                 }   else {
@@ -227,19 +229,22 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
             $tel = $_POST['tel'];
             $email = $_POST['email'];
             $id = $_SESSION['id'];
+            // Общая стоимость покупок в корзине
+            $totalGet = getSumBasket($session);
+            $total = (int)$totalGet['summ']; // преобразование в число
 
             if (isset($tel) && isset($email)) {
+                // Если пользователь залогинился
                 if (isset($id)) {
-                    pushAuthOrder($session, $tel, $email, $id);
-                    session_regenerate_id();
-                }
-                else {
-                    pushOrder($session, $tel, $email);
+                    pushAuthOrder($session, $tel, $email, $id, $total);
                     session_regenerate_id();
                     session_destroy();
                 }
-
-              ;
+                else {
+                    pushOrder($session, $tel, $email, $total);
+                    session_regenerate_id();
+                    session_destroy();
+                }
             }
 
         break;

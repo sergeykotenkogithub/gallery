@@ -17,8 +17,13 @@ function getSumBasket($session) {
 }
 
 
-function changeBasketQuantity($id) {
-    return getOneResultInto("UPDATE `basket` SET `quantity` = quantity + 1, price = price + price_origin WHERE `goods_id` = {$id};");
+function changeBasketQuantity($id, $session) {
+    return getOneResultInto("UPDATE `basket` SET `quantity` = quantity + 1, price = price + price_origin WHERE `goods_id` = {$id} AND session_id = '{$session}';");
+}
+
+function addBasket($session, $id, $price) {
+    $sql = "INSERT INTO basket (session_id, goods_id, price, price_origin) VALUE ('{$session}', '{$id}', '{$price}', '{$price}') ";
+    return getOneResultInto($sql);
 }
 
 function addBasketItem($id, $session) {

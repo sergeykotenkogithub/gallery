@@ -17,10 +17,7 @@ function getItemFeedback($id) {
 
 // Добавление товара в корзину
 
-function addBasket($session, $id, $price) {
-    $sql = "INSERT INTO basket (session_id, goods_id, price, price_origin) VALUE ('{$session}', '{$id}', '{$price}', '{$price}') ";
-    return getOneResultInto($sql);
-}
+
 
 function comparisonGoodsBasket($id, $session) {
     $sql = "SELECT goods_id FROM basket where goods_id = '{$id}' AND session_id = '{$session}'";

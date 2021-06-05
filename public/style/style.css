@@ -602,3 +602,7 @@ a {
 .status__order_admin div {
 	padding-right: 15px;
 }
+
+.myorder__total {
+	padding: 30px 0;
+}
