@@ -7,6 +7,9 @@ define('TEMPLATES_DIR', ROOT . '/templates/'); // К модулям
 define('LAYOUT_DIR', 'layouts/'); // К основным шаблонам
 define('IMG_BIG', $_SERVER['DOCUMENT_ROOT'] . '/gallery_img/big/'); // Большие картинки
 define('IMG_SMALL', $_SERVER['DOCUMENT_ROOT'] . '/gallery_img/small/'); // Маленькие картинки
+define('IMG_SMALL', $_SERVER['DOCUMENT_ROOT'] . '/gallery_img/small/'); // Маленькие картинки
+
+define('ENGINE_DIR', ROOT . '/engine/'); // Обращение к  engine для автоматического подключения
 
 // Вывод сообщений об отправки
 
@@ -30,10 +33,13 @@ define('DB', 'gallerybase');
 
 // Подключение сервисных функций
 
-include ROOT . "/engine/controller.php"; // Контролер
-include ROOT . "/engine/db.php"; // Подключение к базе данных
-include ROOT . "/engine/render.php"; // Прорисовка
-include ROOT . "/engine/menu.php"; // Меню
+include ROOT . "/engine/lib_autoload.php";
+
+
+//include ROOT . "/engine/controller.php"; // Контролер
+//include ROOT . "/engine/db.php"; // Подключение к базе данных
+//include ROOT . "/engine/render.php"; // Прорисовка
+//include ROOT . "/engine/menu.php"; // Меню
 
 // Модели
 
