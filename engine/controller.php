@@ -34,10 +34,14 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
     // Показывает количество товаров в корзине
 
+
+
+
     $session = session_id();
     $countBasket = countGoodsBasketItem($session);
     $count = (($countBasket['count'])) ?: 0;
     $params['count'] = $count;
+
 
     //Переменные для страниц
 
@@ -106,13 +110,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
         // Начальная страница
 
-        case 'index':
-            $params['hello'] = 'Hello,';
-            $params['welcome'] = 'Welcome !';
-            $params['title'] = 'Hello';
-            $background = $_GET['action'];
-            changeThemeAction($background); // Изменение темы
-        break;
+
 
         // Отзывы
 
@@ -144,15 +142,15 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         break;
 
         // Новости
+//
+//        case 'news':
+//            $params['news'] = getNews();
+//        break;
 
-        case 'news':
-            $params['news'] = getNews();
-        break;
-
-        case 'newsone':
-            $id = (int)$_GET['id'];
-            $params['news'] = getOneNews($id);
-        break;
+//        case 'newsone':
+//            $id = (int)$_GET['id'];
+//            $params['news'] = getOneNews($id);
+//        break;
 
         // Калькуляторы
 
@@ -175,98 +173,16 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
 
         // Товары
 
-        case 'goods':
-            session_start();
-            $session = session_id();
-            $params['goods'] = getAllCatalog();
-            $id = $_POST['goods_id'];
-            $price = $_POST['price'];
 
-            // Добавление товара в корзину, если есть такой то увеличивает количество
-            if (isset($id)) {
-
-                // Сравнение товара с базой данных в basket
-
-//                $comparisonGoodsBasket = comparisonGoodsBasket($id, $session);
-
-                if (comparisonGoodsBasket($id, $session)) {
-                    changeBasketQuantity($id, $session);
-                    header("Location: /goods");
-                    die();
-                }   else {
-                    addBasket($session, $id, $price);
-                    header("Location: /goods");
-                    die();
-                }
-            }
-
-        break;
-
-        // Подробное описание товара
-
-        case 'goodsItem':
-            session_start();
-            $id_get = (int)$_GET['id'];
-            $params['goods'] = getOneCatalog($id_get); // Вывоодит информацию о товаре
-            $params['feedback'] = getItemFeedback($id_get);  // Показывает отзывы
-            $price = $_POST['price'];
-            $id = $_POST['goods_id'];
-
-            // Если есть в корзине такой товар то добавляет количество, если нет то добавляет новый товар
-            if (isset($id)) {
-
-                $comparisonGoodsBasket = comparisonGoodsBasket($id, $session);
-
-                // Сравнение товара с базой данных в basket
-
-                if ($comparisonGoodsBasket) {
-                    changeBasketQuantity($id, $session);
-                    header("Location: /goodsItem/?id={$id}");
-                    die();
-                }   else {
-                    addBasket($session, $id, $price);
-                    header("Location: /goodsItem/?id={$id}");
-                    die();
-                }
-            }
-        break;
 
         // Корзина
 
-        case 'basket':
-            session_start();
-            $params['basket'] = getBasketItem($session); // вывод товаров в корзине
-            $params['summ'] = getSumBasket($session); // сумма товаров
-            $quantity = $_GET['quantity'];
-            $id = (int)$_GET['id'];
-            doBasketAction($id, $session, $quantity);
-        break;
+
 
         // Страница с успешно оформленным заказом
 
         case 'congratulations':
-            session_start();
-            $session = session_id();
-            $tel = $_POST['tel'];
-            $email = $_POST['email'];
-            $id = $_SESSION['id'];
-            // Общая стоимость покупок в корзине
-            $totalGet = getSumBasket($session);
-            $total = (int)$totalGet['summ']; // преобразование в число
 
-            if (isset($tel) && isset($email)) {
-                // Если пользователь залогинился
-                if (isset($id)) {
-                    pushAuthOrder($session, $tel, $email, $id, $total);
-                    session_regenerate_id();
-                    session_destroy();
-                }
-                else {
-                    pushOrder($session, $tel, $email, $total);
-                    session_regenerate_id();
-                    session_destroy();
-                }
-            }
 
         break;
 
@@ -276,13 +192,7 @@ function prepareVariables($page, $menu, $messageUpload, $getImages, $action = ""
         // Страница apicalc не создаётся, просто нужно для передачи с калькулятора, как api,
         // в данном примере считает данные и отдаёт обратно.
         case 'apicalc':
-            $data = json_decode(file_get_contents('php://input'));
-            $arg1 = $data->arg1;
-            $arg2 = $data->arg2;
-            $operation = $data->operation;
-            header("Content-type: application/json");
-            echo json_encode(doCalculatorOperation($arg1, $arg2, $operation));
-            die();
+
         break;
     }
     return $params;

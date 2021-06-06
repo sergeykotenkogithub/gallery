@@ -13,8 +13,14 @@ function adminOrderTotal($id) {
 }
 
 function adminOrderStatus($id) {
-    $sql = "SELECT status FROM orders WHERE id = {$id} ";
+    $sql = "SELECT id, status FROM orders WHERE id = {$id} ";
     return getOneResult($sql);
+}
+
+
+function changeStatus($adminOrder, $status_id) {
+    $sql = "UPDATE orders SET status = '$adminOrder' WHERE id = {$status_id}";
+    return getOneResultInto($sql);
 }
 
 

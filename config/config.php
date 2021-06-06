@@ -1,29 +1,15 @@
 <?php
 
-// Пути файлов
+//.............................Пути файлов...................................................................
 
 define('ROOT', dirname(__DIR__)); // К основной директории, не public
 define('TEMPLATES_DIR', ROOT . '/templates/'); // К модулям
-define('LAYOUT_DIR', 'layouts/'); // К основным шаблонам
+define('LAYOUT_DIR', '_layouts/'); // К основным шаблонам
 define('IMG_BIG', $_SERVER['DOCUMENT_ROOT'] . '/gallery_img/big/'); // Большие картинки
 define('IMG_SMALL', $_SERVER['DOCUMENT_ROOT'] . '/gallery_img/small/'); // Маленькие картинки
 define('IMG_SMALL', $_SERVER['DOCUMENT_ROOT'] . '/gallery_img/small/'); // Маленькие картинки
 
-define('ENGINE_DIR', ROOT . '/engine/'); // Обращение к  engine для автоматического подключения
-
-// Вывод сообщений об отправки
-
-$messageUpload = [
-    'OK' => 'Файл успешно загружен',
-    'ERROR' => 'Ошибка',
-    'JPG' => 'Можно загружать только jpg-файлы',
-    'DOUBLE' => 'Файл существует, выберите другое имя файла!',
-    'BIGSIZE' => 'Размер файла не больше 5 мб',
-    'NOTPHP' => 'Загрузка php-файлов запрещена!',
-    'NOTIMG' => 'Можно загружать только jpg-файлы, неверное содержание файла, не изображение',
-];
-
-// DB config
+//..............................DB config....................................................................
 
 define('HOST', 'localhost:3307');
 define('USER', 'pakko');
@@ -31,15 +17,16 @@ define('PASS', '123');
 define('DB', 'gallerybase');
 
 
-// Подключение сервисных функций
+//.......................Подключение сервисных функций........................................................
 
-include ROOT . "/engine/lib_autoload.php";
+include ROOT . "/engine/lib_autoload.php";  // Функция автоматического подключение файлов
+include ROOT . "/engine/db.php"; // Подключение к базе данных
+include ROOT . "/engine/render.php"; // Прорисовка
+include ROOT . "/engine/menu.php"; // Меню
 
+//.....................Автоматическое подключение файлов....................................................
 
-//include ROOT . "/engine/controller.php"; // Контролер
-//include ROOT . "/engine/db.php"; // Подключение к базе данных
-//include ROOT . "/engine/render.php"; // Прорисовка
-//include ROOT . "/engine/menu.php"; // Меню
+autoloader("controller"); // Подключение контроллеров
 
 // Модели
 

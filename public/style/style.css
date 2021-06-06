@@ -621,3 +621,25 @@ a {
 .main__name {
 	padding: 20px 0;
 }
+
+select {
+	background: none;
+	outline: none;
+	margin-top: 15px;
+	border: 1px solid white;
+	padding: 10px;
+	border-radius: 50px;
+	display: inline-block;
+	color: darkgray;
+	transition: color 0.5s;
+	box-shadow: 2px 4px 0px #ccc;
+}
+
+.adminOrder form {
+	display: flex;
+	margin-bottom: 20px;
+}
+
+.adminOrder form button {
+	margin-right: 15px;
+}

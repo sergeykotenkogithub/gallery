@@ -1,6 +1,6 @@
 <div class="container">
     <div>
-<!--        <form action="/goodsItem/?id=1" method="post">-->
+
         <form action="/goodsItem/?id=<?=$goods['id']?>" method="post">
             <input hidden type="text" name="goods_id" value="<?=$goods['id']?>">
             <input hidden type="text" name="price" value="<?=$goods['price']?>">
@@ -15,6 +15,7 @@
                 <div> <?=$ok?></div>
             </div>
         </form>
+
         <div class="feedbackCatalog">
             <h2>Отзывы:</h2>
             <div> <?=$feedback['name']?> : <?=$feedback['feedback']?></div>
