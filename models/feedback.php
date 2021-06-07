@@ -1,8 +1,19 @@
 <?php
+
+//........................db.........................................
+
 function getAllFeedback() {
     $sql = "SELECT * FROM feedback ORDER BY id DESC";
     return getAssocResult($sql);
 }
+
+
+function feedbackAdd($name, $feedback, $feedback_id) {
+    $sql = "INSERT INTO feedback (`name`, feedback, goods_id) VALUE ('$name', '$feedback', '$feedback_id')";
+    return getOneResultInto($sql);
+}
+
+//..................................................................
 
 // Отладка  var_dump($_POST);
 

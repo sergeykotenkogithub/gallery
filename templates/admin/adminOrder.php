@@ -1,7 +1,7 @@
 <div class="container">
     <?php if ($admin): ?>
         <div class="status__order_admin">
-            <div> Статус: <?=$status['status']?> </div>
+            <div class="status__admin"> Статус: <?=$status['status']?> </div>
         </div>
 
         <div class="adminOrder">
@@ -9,7 +9,8 @@
                 <input hidden type="text" name="status_id" value="<?=$status['id']?>">
                 <button class="buy" type="submit">Изменить статус:</button>
                 <select name="change">
-                    <option value="Передан на обработку>Передан на обработку"</option>
+                    <option value="Передан на обработку">Ожидайте звонка от оператора</option>
+                    <option value="Передан на обработку">Передан на обработку</option>
                     <option value="Обрабатывается">Обрабатывается</option>
                     <option value="Подготовлен счёт на оплату">Подготовлен счёт на оплату</option>
                     <option value="Ожидаем поставку товара">Ожидаем поставку товара</option>

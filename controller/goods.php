@@ -40,6 +40,23 @@ function goodsItemController($params) {
     $params['feedback'] = getItemFeedback($id_get);  // Показывает отзывы
     $price = $_POST['price'];
     $id = $_POST['goods_id'];
+    $c = getItemFeedback($id_get);
+
+    //.................Получение обратной связи по форме...................
+
+    $feedback_id = $_POST['feedback_id'];
+    $name = $_POST['name'];
+    $feedback = $_POST['feedback'];
+
+    // Проверка чтобы был текст в имени и в комментарии
+    if ($name ==! '' && $feedback ==! '' && isset($feedback_id)) {
+//        var_dump($feedback_id);
+//        var_dump($name);
+//        var_dump($feedback);
+        feedbackAdd($name, $feedback, $feedback_id);
+        header("Location: /goodsItem/?id=$feedback_id");
+//        var_dump($c);
+    }
 
     // Если есть в корзине такой товар то добавляет количество, если нет то добавляет новый товар
     if (isset($id)) {

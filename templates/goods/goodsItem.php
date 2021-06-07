@@ -1,6 +1,5 @@
 <div class="container">
     <div>
-
         <form action="/goodsItem/?id=<?=$goods['id']?>" method="post">
             <input hidden type="text" name="goods_id" value="<?=$goods['id']?>">
             <input hidden type="text" name="price" value="<?=$goods['price']?>">
@@ -16,10 +15,34 @@
             </div>
         </form>
 
+
         <div class="feedbackCatalog">
             <h2>Отзывы:</h2>
-            <div> <?=$feedback['name']?> : <?=$feedback['feedback']?></div>
+
+            <? foreach ($feedback as $item): ?>
+            <div> <?=$item['name']?> : <?=$item['feedback']?></div>
+            <?endforeach;?>
+
         </div>
+
+        <?php if ($auth) :?>
+
+        <div>
+            <form action="http://gal/goodsItem/?id=<?=$goods['id']?>"" method="post">
+                <input hidden type="text" name="feedback_id" value="<?=$goods['id']?>">
+                <input type="text" name="name" placeholder="Ваше имя">
+                <input type="text" name="feedback" placeholder="Отзыв">
+                <input type="submit" value="Добавить отзыв" ">
+            </form>
+        </div>
+
+        <?else:?>
+        <!--        -->
+        <div class="feedback__noauth">
+            <div class="feedback__text">Можете оставить отзыв, если зарегистрируетесь <span>
+                    <a href="/">Зарегистрироваться</a> </span></div>
+        </div>
+        <?php endif; ?>
 
     </div>
 </div>
