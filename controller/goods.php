@@ -34,6 +34,9 @@ function goodsController($params) {
 function goodsItemController($params) {
 
     $message = '';
+    $row = [];
+    $params['btnText'] = "Добавить отзыв";
+    $params['action'] = "create";
     $messages = [
         'OK' => 'Cообщение добавлено',
         'DELETE' => 'Cообщение удалено',
@@ -57,11 +60,30 @@ function goodsItemController($params) {
     $feedback = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $_POST['feedback'])));
 
     // Проверка чтобы был текст в имени и в комментарии
-    if ($name ==! '' && $feedback ==! '' && isset($feedback_id)) {
-        feedbackAdd($name, $feedback, $feedback_id);
-        header("Location: /goodsItem/?id=$feedback_id&message=OK");
-        die();
+
+    if($_GET['action'] == 'create') {
+        if ($name == !'' && $feedback == !'' && isset($feedback_id)) {
+            feedbackAdd($name, $feedback, $feedback_id);
+            header("Location: /goodsItem/?id=$feedback_id&message=OK");
+            die();
+        }
     }
+
+    if ($_GET['action'] == 'edit') {
+        $feedback_edit_id = (int)$_GET['feedback_edit_id'];
+        $params['row'] = getFeedbackEdit($feedback_edit_id);
+        $params['action'] = "save";
+        $params['btnText'] = "Изменить";
+    }
+
+    if ($_GET['action'] == 'save') {
+        $name =  strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $_POST['name'])));
+        $feedback = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $_POST['feedback'])));
+        $feedback_save_id = (int)$_POST['feedback_save_id'];
+        getFeedbackSave($name, $feedback, $feedback_save_id);
+        header("Location: /goodsItem/?id=$feedback_id&message=EDIT");
+    }
+
 
     // Если есть в корзине такой товар то добавляет количество, если нет то добавляет новый товар
     if (isset($id)) {
@@ -87,6 +109,7 @@ function goodsItemController($params) {
         $params['message'] = $messages[$_GET['message']];
     }
 
+//
 
     $templateName = '/goods/goodsItem';
 
