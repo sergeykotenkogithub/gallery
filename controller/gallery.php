@@ -1,8 +1,6 @@
 <?php
 
-function galleryController($params, $action) {
-
-    if(empty($action)) $action = "gallery";
+function galleryController($params) {
 
     //.......................Вывод сообщений об отправки..........................................................
 
@@ -16,52 +14,37 @@ function galleryController($params, $action) {
         'NOTIMG' => 'Можно загружать только jpg-файлы, неверное содержание файла, не изображение',
     ];
 
-    // Вывод картинок gallery_img/big/
-    $files = array_splice( scandir(IMG_BIG), 2);
+    // Проверка на загрузку фотографии и переименовывание
 
-    //...........................................................................................................
+    $files = array_splice( scandir(IMG_BIG), 2);
 
     if (isset($_FILES['myfile'])) {
         upload($files);
+        $params['message'] = $_SESSION['messages'];
     }
 
-    // Проверка на загрузку фотографии и переименовывание
 
-    switch ($action) {
+    //...........................................................................................................
 
-        case 'gallery':
-            $params['title'] = 'Gallery'; // Заголок
-            $params['gallery'] = getGallery(); // Через базу данных получаю полный список
-            $params['gallerySort'] = getGallerySorting(); // Через базу данных получаю отсортированный список
-            // Вывод сообщения при загрузке
-            $params['message'] = $messageUpload[$_GET['message']];
-            break;
+    $params['title'] = 'Gallery'; // Заголок
+    $params['gallery'] = getGallery(); // Через базу данных получаю полный список
+    $params['gallerySort'] = getGallerySorting(); // Через базу данных получаю отсортированный список
 
-        case 'delete':
-            $action = "delete";
-            // Удаление и вывод сообщения
-            doGalleryAction($action);
-            $params['message_del'] =  strip_tags($_GET['message_del']);
-        break;
+    // Вывод сообщения при загрузке
+    $params['message'] = $messageUpload[$_GET['message']];
 
+//     Удаление и вывод сообщения
+    $action = $_GET['action'];
+    if (isset($action)) {
+        doGalleryAction($action);
     }
-
-//    $params['title'] = 'Gallery'; // Заголок
-//    $params['gallery'] = getGallery(); // Через базу данных получаю полный список
-//    $params['gallerySort'] = getGallerySorting(); // Через базу данных получаю отсортированный список
-//
-//    // Вывод сообщения при загрузке
-//    $params['message'] = $messageUpload[$_GET['message']];
-//
-//    // Удаление и вывод сообщения
 //    doGalleryAction($action);
-//    $params['message_del'] =  strip_tags($_GET['message_del']);
+    $params['message_del'] =  strip_tags($_GET['message_del']);
 //    $action = "gallery";
 
-
-    $templateName = "/gallery/" . $action;
-
+    $templateName = "/gallery/" . 'gallery';
     return render($templateName, $params);
+
 }
 
 function galleryoneController($params) {

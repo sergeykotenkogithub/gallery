@@ -25,7 +25,7 @@
                 <img class="imgBig" src='/gallery_img/small/<?=$item['image']?>' width='150' height='100'/>
             </a>
             <!--   Удаление картинки         -->
-            <a class="del" href="/gallery/delete/?id=<?=$item['id']?>&name=<?=$item['image']?>">
+            <a class="del" href="/gallery/?id=<?=$item['id']?>&name=<?=$item['image']?>&action=delete">
                 <img class="delete" src="/img/delete.svg" alt="delete">
             </a>
         </div>

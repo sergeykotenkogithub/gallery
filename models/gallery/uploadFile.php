@@ -46,7 +46,8 @@ function upload($getImages) {
         }
         // Сообщение о загрузке файла
         if (move_uploaded_file($_FILES['myfile']['tmp_name'], $path)){
-            header("Location: /gallery/?message=OK");
+           $_SESSION['messages'] = 'Хорошо';
+           header("Location: /gallery/?message=OK");
         }
         else {
             header("Location: /gallery/?message=ERROR");
