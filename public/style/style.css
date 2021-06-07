@@ -651,10 +651,20 @@ select {
 }
 
 .feedback__noauth  {
-	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
 .feedback__text {
 	color: darkgrey;
 	font-size: 15px;
+}
+
+.message {
+	margin-bottom: 20px;
+	color: darkgrey;
+	font-size: 17px;
+}
+
+.goodsItem__feedback form {
+	margin-bottom: 20px;
 }

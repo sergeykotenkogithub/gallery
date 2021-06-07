@@ -33,6 +33,15 @@ function goodsController($params) {
 
 function goodsItemController($params) {
 
+    $message = '';
+    $messages = [
+        'OK' => 'Cообщение добавлено',
+        'DELETE' => 'Cообщение удалено',
+        'EDIT' => 'Cообщение изменено',
+        'ERROR' => 'Ошибка'
+    ];
+
+
     session_start();
     $session = session_id();
     $id_get = (int)$_GET['id'];
@@ -40,22 +49,18 @@ function goodsItemController($params) {
     $params['feedback'] = getItemFeedback($id_get);  // Показывает отзывы
     $price = $_POST['price'];
     $id = $_POST['goods_id'];
-    $c = getItemFeedback($id_get);
 
     //.................Получение обратной связи по форме...................
 
-    $feedback_id = $_POST['feedback_id'];
-    $name = $_POST['name'];
-    $feedback = $_POST['feedback'];
+    $feedback_id = (int)$_POST['feedback_id'];
+    $name =  strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $_POST['name'])));
+    $feedback = strip_tags(htmlspecialchars(mysqli_real_escape_string(getDb(), $_POST['feedback'])));
 
     // Проверка чтобы был текст в имени и в комментарии
     if ($name ==! '' && $feedback ==! '' && isset($feedback_id)) {
-//        var_dump($feedback_id);
-//        var_dump($name);
-//        var_dump($feedback);
         feedbackAdd($name, $feedback, $feedback_id);
-        header("Location: /goodsItem/?id=$feedback_id");
-//        var_dump($c);
+        header("Location: /goodsItem/?id=$feedback_id&message=OK");
+        die();
     }
 
     // Если есть в корзине такой товар то добавляет количество, если нет то добавляет новый товар
@@ -75,6 +80,13 @@ function goodsItemController($params) {
             die();
         }
     }
+
+    // Сообщение
+
+    if(isset($_GET['message'])) {
+        $params['message'] = $messages[$_GET['message']];
+    }
+
 
     $templateName = '/goods/goodsItem';
 

@@ -18,31 +18,38 @@
 
         <div class="feedbackCatalog">
             <h2>Отзывы:</h2>
+            <div class="message"><?=$message?></div>
+
+            <?php if ($auth) :?>
+
+            <div class="goodsItem__feedback">
+                <form action="http://gal/goodsItem/?id=<?=$goods['id']?>" method="post">
+                    <input hidden type="text" name="feedback_id" value="<?=$goods['id']?>">
+                    <input type="text" name="name" placeholder="Ваше имя">
+                    <input type="text" name="feedback" placeholder="Отзыв">
+                    <input type="submit" value="Добавить отзыв">
+                </form>
+            </div>
+
+            <?php else: ?>
+
+                <div class="feedback__noauth">
+                    <div class="feedback__text">Можете оставить отзыв, если зарегистрируетесь <span>
+                    <a href="/">Зарегистрироваться</a> </span></div>
+                </div>
+
+            <?php endif; ?>
+
 
             <? foreach ($feedback as $item): ?>
-            <div> <?=$item['name']?> : <?=$item['feedback']?></div>
+            <div> <?=$item['name']?> : <?=$item['feedback']?>
+                <a href="?action=delete&id=<?=$item['id']?>">[x]</a>
+            </div>
+
             <?endforeach;?>
 
         </div>
 
-        <?php if ($auth) :?>
-
-        <div>
-            <form action="http://gal/goodsItem/?id=<?=$goods['id']?>"" method="post">
-                <input hidden type="text" name="feedback_id" value="<?=$goods['id']?>">
-                <input type="text" name="name" placeholder="Ваше имя">
-                <input type="text" name="feedback" placeholder="Отзыв">
-                <input type="submit" value="Добавить отзыв" ">
-            </form>
-        </div>
-
-        <?else:?>
-        <!--        -->
-        <div class="feedback__noauth">
-            <div class="feedback__text">Можете оставить отзыв, если зарегистрируетесь <span>
-                    <a href="/">Зарегистрироваться</a> </span></div>
-        </div>
-        <?php endif; ?>
 
     </div>
 </div>
