@@ -21,8 +21,8 @@
             <div class="message"><?=$message?></div>
 
             <?php if ($auth) :?>
-
             <div class="goodsItem__feedback">
+                <div>Напишите ваш отзыв:</div>
                 <form action="http://gal/goodsItem/?id=<?=$goods['id']?>&action=<?=$action?>" method="post">
                     <input hidden type="text" name="feedback_id" value="<?=$goods['id']?>">
                     <input hidden type="text" name="feedback_save_id" value="<?=$row['id']?>">
@@ -41,11 +41,12 @@
 
             <?php endif; ?>
 
-
             <? foreach ($feedback as $item): ?>
             <div> <?=$item['name']?> : <?=$item['feedback']?>
+                <?php if ($admin) :?>
                 <a href="?action=delete&id=<?=$item['id']?>&feedback_delete=<?=$item['edit']?>">[x]</a>
                 <a href="?action=edit&id=<?=$item['id']?>&feedback_edit_id=<?=$item['edit']?>">[edit]</a>
+                <?php endif; ?>
             </div>
 
             <?endforeach;?>

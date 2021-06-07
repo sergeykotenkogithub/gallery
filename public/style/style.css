@@ -685,3 +685,7 @@ select {
 .btnFeedback {
 	background: none;
 }
+
+.goodsItem__feedback {
+	margin: 35px 0;
+}
