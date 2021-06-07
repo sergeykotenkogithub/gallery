@@ -26,9 +26,9 @@
                 <form action="http://gal/goodsItem/?id=<?=$goods['id']?>&action=<?=$action?>" method="post">
                     <input hidden type="text" name="feedback_id" value="<?=$goods['id']?>">
                     <input hidden type="text" name="feedback_save_id" value="<?=$row['id']?>">
-                    <input type="text" name="name" placeholder="Ваше имя" value="<?=$row['name']?>">
-                    <input type="text" name="feedback" placeholder="Отзыв" value="<?=$row['feedback']?>">
-                    <input type="submit" value="<?=$btnText?>">
+                    <input class="inputAll" type="text" name="name" placeholder="Ваше имя" value="<?=$row['name']?>">
+                    <input class="inputAll" type="text" name="feedback" placeholder="Отзыв" value="<?=$row['feedback']?>">
+                    <input class="buy btnFeedback" type="submit" value="<?=$btnText?>">
                 </form>
             </div>
 
@@ -44,7 +44,7 @@
 
             <? foreach ($feedback as $item): ?>
             <div> <?=$item['name']?> : <?=$item['feedback']?>
-                <a href="?action=delete&id=<?=$item['id']?>">[x]</a>
+                <a href="?action=delete&id=<?=$item['id']?>&feedback_delete=<?=$item['edit']?>">[x]</a>
                 <a href="?action=edit&id=<?=$item['id']?>&feedback_edit_id=<?=$item['edit']?>">[edit]</a>
             </div>
 

@@ -13,8 +13,6 @@ function goodsController($params) {
 
         // Сравнение товара с базой данных в basket
 
-//                $comparisonGoodsBasket = comparisonGoodsBasket($id, $session);
-
         if (comparisonGoodsBasket($id, $session)) {
             changeBasketQuantity($id, $session);
             header("Location: /goods");
@@ -84,6 +82,13 @@ function goodsItemController($params) {
         header("Location: /goodsItem/?id=$feedback_id&message=EDIT");
     }
 
+    if ($_GET['action'] == 'delete') {
+        $id_goods = $_GET['id'];
+        $id_del = $_GET['feedback_delete'];
+        getFeedbackDelete($id_del);
+        header("Location: /goodsItem/?id=$id_goods&message=DELETE");
+    }
+
 
     // Если есть в корзине такой товар то добавляет количество, если нет то добавляет новый товар
     if (isset($id)) {
@@ -108,8 +113,6 @@ function goodsItemController($params) {
     if(isset($_GET['message'])) {
         $params['message'] = $messages[$_GET['message']];
     }
-
-//
 
     $templateName = '/goods/goodsItem';
 

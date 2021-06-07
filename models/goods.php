@@ -36,8 +36,8 @@ function getFeedbackSave($name, $feedback, $id) {
     return getOneResultInto($sql);
 }
 
-//function getFeedbackSave($id) {
-//    $sql = "DELETE FROM feedback WHERE id = {$id}";
-//    return getOneResultInto($sql);
-//}
+function getFeedbackDelete($id) {
+    $sql = "DELETE FROM feedback WHERE id = {$id}";
+    return getOneResultInto($sql);
+}
 

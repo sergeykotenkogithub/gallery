@@ -668,3 +668,20 @@ select {
 .goodsItem__feedback form {
 	margin-bottom: 20px;
 }
+
+.inputAll {
+	border: 1px solid white;
+	padding: 10px;
+	border-radius: 50px;
+	display: inline-block;
+	color: darkgray;
+	transition: color 0.5s;
+	box-shadow: 2px 4px 0px #ccc;
+	background: none;
+	outline: none;
+	margin-right: 15px;
+}
+
+.btnFeedback {
+	background: none;
+}
