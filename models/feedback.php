@@ -46,3 +46,7 @@ function doFeedbackAction($action) {
     }
 }
 
+function feedback_site($name, $textarea) {
+    $sql = "INSERT INTO feedback(`name`, feedback, it_is) VALUES ('$name', '$textarea', 'site')";
+    return getOneResultInto($sql);
+}

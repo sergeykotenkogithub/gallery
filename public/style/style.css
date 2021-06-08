@@ -689,3 +689,15 @@ select {
 .goodsItem__feedback {
 	margin: 35px 0;
 }
+
+.feedbackName {
+	text-align: center;
+}
+
+._btnBig {
+	background: none;
+	padding: 18px;
+	width: 220px;
+	margin: 35px 0;
+}
+

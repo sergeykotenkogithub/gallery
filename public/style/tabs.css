@@ -1,0 +1,134 @@
+.tabs {
+    padding-bottom: 20px;
+}
+
+.tabs__items {
+    display: flex;
+}
+
+.tabs__item {
+    flex: 0 1 33.333%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.tabs__block {
+    position: relative;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 24px;
+    display: none;
+}
+
+.tabs__block:nth-child(1) {
+    color: white;
+    box-shadow: 0 0px 22px #ccc;
+    border-radius: 10px;
+}
+.tabs__block:nth-child(2) {
+    color: white;
+    box-shadow: 0 0px 22px #ccc;
+    border-radius: 10px;
+}
+.tabs__block:nth-child(3) {
+    color: white;
+    box-shadow: 0 0px 22px #ccc;
+    border-radius: 10px;
+}
+
+.text {
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.tabs__block:target {
+    display: block;
+}
+
+.tabs__block:before {
+    content: "";
+    height: 50px;
+    width: 33.333%;
+    position: absolute;
+    top: -50px;
+}
+
+.tabs__block:nth-child(1):before {
+    left: 0;
+    box-shadow: 0 0px 22px #ccc;
+    border-radius: 10px;
+    top: -70px;
+}
+.tabs__block:nth-child(2):before {
+    left: 33.333%;
+    box-shadow: 0 0px 22px #ccc;
+    border-radius: 10px;
+    top: -70px;
+}
+.tabs__block:nth-child(3):before {
+    right: 0;
+    box-shadow: 0 0px 22px #ccc;
+    border-radius: 10px;
+    top: -70px;
+}
+
+.tabs__item span {
+    position: relative;
+    z-index: 2;
+}
+
+.tabs__body {
+    margin-top: 25px;
+}
+
+@media (max-width: 600px) {
+    .tabs__item span {
+        display: block;
+        width: 100px;
+        padding: 0 5px;
+        white-space: nowrap;
+        text-align: center;
+        overflow: hidden;
+        font-size: 14px;
+        text-overflow: ellipsis;
+    }
+}
+
+.feedbackTabs form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.feedbackTabs__tabs {
+    width: 270px;
+    margin: 10px 0;
+}
+
+.feedbackTabs__select {
+    width: 100px;
+}
+
+.feedbackTabs__textarea {
+    resize: none;
+    color: white;
+    background: none;
+    box-shadow: 2px 4px 0px #ccc;
+    outline: none;
+    width: 450px;
+    height: 200px;
+}
+
+.feedback__choose {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 456px;
+    margin-bottom: 20px;
+}

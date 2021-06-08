@@ -20,6 +20,8 @@ define('DB', 'gallerybase');
 //.......................Подключение сервисных функций........................................................
 
 include ROOT . "/engine/lib_autoload.php";  // Функция автоматического подключение файлов
+
+//autoloader("engine");
 include ROOT . "/engine/db.php"; // Подключение к базе данных
 include ROOT . "/engine/render.php"; // Прорисовка
 include ROOT . "/engine/menu.php"; // Меню
@@ -27,7 +29,8 @@ include ROOT . "/engine/menu.php"; // Меню
 //.....................Автоматическое подключение файлов....................................................
 
 autoloader("controller"); // Подключение контроллеров
-
+//autoloader("models"); // Подключение моделей общих
+//var_dump(autoloaders('engine'));
 // Модели
 
 include ROOT . "/models/feedback.php";  // Отзывы

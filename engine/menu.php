@@ -29,7 +29,7 @@ $menu = [
     ],
     [
         "title" => "Feedback",
-        "href" => "/feedback",
+        "href" => "/feedback#tabs_03",
     ],
     [
         "title" => "Goods",
@@ -48,9 +48,10 @@ function getMenu($menu)
 
     foreach ($menu as $item) {
 
-        if ($url ==  $item['href']) {
+        if ($url ==  $item['href'] || $url . '#tabs_03' == $item['href'] ) {
             $url1 = "active";
-        } else {
+        }
+        else {
             $url1 = "noactive";
         }
 
