@@ -6,6 +6,7 @@ function feedbackController($params, $action) {
 
     doFeedbackAction($action);
     $params['feedback'] = getAllFeedback();
+    $params['feedback_site'] = getAllFeedbackSite();
 
     $templateName = 'feedback';
     $textarea = strip_tags(htmlspecialchars(($_POST['textarea'])));
@@ -17,16 +18,20 @@ function feedbackController($params, $action) {
     if ($feedback_answer == 'site') {
         feedback_site($name, $textarea);
         $_SESSION['message'] = 'Ваш отзыв добавлен';
-        $params['message'] = $_SESSION['message'] ;
+        $params['message'] = $_SESSION['message'];
         unset($_SESSION['message']);
-//        header('Location: /feedback#tabs_03');
+        //        header('Location: /feedback#tabs_03');
     }
 
-//    elseif  ((isset($_POST['feedback_answer']) != 'site') && isset($name)) {
    if  ($_POST['feedback_answer'] != 'site' & isset($_POST['name'])) {
-        var_dump('не сайт');
-        var_dump($_POST);
+       feedback_goods($name, $textarea, $feedback_answer);
+       $_SESSION['message'] = 'Ваш отзыв добавлен';
+       $params['message'] = $_SESSION['message'] ;
+       unset($_SESSION['message']);
+//       header('Location: /feedback#tabs_03');
     }
+
+
 
     return render($templateName, $params);
 

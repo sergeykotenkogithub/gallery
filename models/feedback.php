@@ -3,13 +3,29 @@
 //........................db.........................................
 
 function getAllFeedback() {
-    $sql = "SELECT * FROM feedback ORDER BY id DESC";
+    $sql = "SELECT * FROM feedback WHERE it_is = 'product' ORDER BY id DESC";
+    return getAssocResult($sql);
+}
+
+function  getAllFeedbackSite() {
+    $sql = "SELECT * FROM feedback WHERE it_is = 'site' ORDER BY id DESC";
     return getAssocResult($sql);
 }
 
 
+
 function feedbackAdd($name, $feedback, $feedback_id) {
     $sql = "INSERT INTO feedback (`name`, feedback, goods_id) VALUE ('$name', '$feedback', '$feedback_id')";
+    return getOneResultInto($sql);
+}
+
+function feedback_site($name, $textarea) {
+    $sql = "INSERT INTO feedback(`name`, feedback, it_is) VALUES ('$name', '$textarea', 'site')";
+    return getOneResultInto($sql);
+}
+
+function feedback_goods($name, $textarea, $feedback_answer) {
+    $sql = "INSERT INTO feedback(`name`, feedback, goods_id) VALUES ('$name', '$textarea', $feedback_answer)";
     return getOneResultInto($sql);
 }
 
@@ -46,7 +62,4 @@ function doFeedbackAction($action) {
     }
 }
 
-function feedback_site($name, $textarea) {
-    $sql = "INSERT INTO feedback(`name`, feedback, it_is) VALUES ('$name', '$textarea', 'site')";
-    return getOneResultInto($sql);
-}
+

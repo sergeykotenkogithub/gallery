@@ -60,10 +60,6 @@ $countBasket = countGoodsBasketItem($session);
 $count = (($countBasket['count'])) ?: 0;
 $params['count'] = $count;
 
-
-
-
-
 // ......................Отображение.....................................
 
 $controllerName = $page . "Controller";

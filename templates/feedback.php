@@ -10,18 +10,18 @@
                     <a href="#tabs_03" class="tabs__item"><span>Написать отзыв</span></a>
                 </nav>
                 <div class="tabs__body">
+
+                    <!--         Отзывы о сайте           -->
                     <div id="tabs_01" class="tabs__block">
 
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi distinctio non quam sed veniam. Alias amet architecto cupiditate fugiat odio quidem quos, voluptates? Aliquam fugiat natus nobis officiis sequi vel!
+                        <?foreach ( $feedback_site as $value): ?>
+                            <div class="feedback" ><strong><?=$value['name']?></strong>: <?=$value['feedback']?></div>
+                        <? endforeach;?>
 
                     </div>
 
                     <!--  Отзывы о товаре -->
                     <div id="tabs_02" class="tabs__block">
-
-
-                                
-
 
                             <?foreach ($feedback as $value): ?>
                                 <div class="feedback" ><strong><?=$value['name']?></strong>: <?=$value['feedback']?></div>
@@ -29,6 +29,7 @@
 
                     </div>
 
+                    <!--  Написать отзыв          -->
                     <div id="tabs_03" class="tabs__block">
 
                         <div class="feedbackTabs">
