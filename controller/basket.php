@@ -10,7 +10,17 @@ function basketController($params) {
     $id = (int)$_GET['id'];
     doBasketAction($id, $session, $quantity);
 
+
     $templateName = 'basket';
+
+    if(empty(getBasketItem($session))) {
+//        var_dump(getBasketItem($session));
+        $params['show'] = true;
+    }
+    else {
+//        var_dump("Ghbdsd");
+    }
+
 
     return render($templateName, $params);
 }

@@ -21,6 +21,15 @@
         </div>
     </div>
     <?php endforeach;?>
+
+    <? if (!$show):?>
     <div class="rub total">Итого: <?=$summ['summ']?> </div>
+    <?else:?>
+    <div>Вы ещё не добавили товар</div>
+    <?endif;?>
+
+    <? if (!$show): ?>
     <div class="order"><a href="/order">Оформить заказ</a></div>
+    <?endif;?>
+
 </div>
