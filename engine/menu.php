@@ -29,7 +29,7 @@ $menu = [
     ],
     [
         "title" => "Feedback",
-        "href" => "/feedback#tabs_03",
+        "href" => "/feedback",
     ],
     [
         "title" => "Goods",

@@ -4,17 +4,15 @@
 
 .tabs__items {
     display: flex;
+    margin-bottom: 18px;
 }
 
 .tabs__item {
-    flex: 0 1 33.333%;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-transform: uppercase;
     text-decoration: none;
     font-size: 17px;
+    padding: 15px;
+    cursor: pointer
 }
 
 .tabs__block {
@@ -23,81 +21,18 @@
     font-size: 18px;
     line-height: 24px;
     display: none;
-}
-
-.tabs__block:nth-child(1) {
-    color: white;
-    box-shadow: 0 0px 22px #ccc;
-    border-radius: 10px;
-}
-.tabs__block:nth-child(2) {
-    color: white;
-    box-shadow: 0 0px 22px #ccc;
-    border-radius: 10px;
-}
-.tabs__block:nth-child(3) {
     color: white;
     box-shadow: 0 0px 22px #ccc;
     border-radius: 10px;
 }
 
-.text {
-    font-size: 15px;
-    line-height: 18px;
-}
-
-.tabs__block:target {
-    display: block;
-}
-
-.tabs__block:before {
-    content: "";
-    height: 50px;
-    width: 33.333%;
-    position: absolute;
-    top: -50px;
-}
-
-.tabs__block:nth-child(1):before {
-    left: 0;
+.tabs__item.active {
+    color: white;
     box-shadow: 0 0px 22px #ccc;
     border-radius: 10px;
-    top: -70px;
-}
-.tabs__block:nth-child(2):before {
-    left: 33.333%;
-    box-shadow: 0 0px 22px #ccc;
-    border-radius: 10px;
-    top: -70px;
-}
-.tabs__block:nth-child(3):before {
-    right: 0;
-    box-shadow: 0 0px 22px #ccc;
-    border-radius: 10px;
-    top: -70px;
 }
 
-.tabs__item span {
-    position: relative;
-    z-index: 2;
-}
-
-.tabs__body {
-    margin-top: 25px;
-}
-
-@media (max-width: 600px) {
-    .tabs__item span {
-        display: block;
-        width: 100px;
-        padding: 0 5px;
-        white-space: nowrap;
-        text-align: center;
-        overflow: hidden;
-        font-size: 14px;
-        text-overflow: ellipsis;
-    }
-}
+/*.......................Написать отзыв.................................. */
 
 .feedbackTabs form {
     display: flex;
@@ -131,4 +66,12 @@
     justify-content: space-between;
     width: 456px;
     margin-bottom: 20px;
+}
+
+.tabs__block {
+    display: none;
+}
+
+.tabs__block.active {
+    display: block;
 }

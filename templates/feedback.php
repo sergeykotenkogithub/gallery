@@ -5,14 +5,16 @@
         <div class="content">
             <div class="tabs">
                 <nav class="tabs__items">
-                    <a href="#tabs_01" class="tabs__item"><span>Отзывы о сайте</span></a>
-                    <a href="#tabs_02" class="tabs__item"><span>Отзывы о товаре</span></a>
-                    <a href="#tabs_03" class="tabs__item"><span>Написать отзыв</span></a>
+                    <a class="tabs__item" data-tab="#tab_1">Отзывы о сайте</a>
+                    <a class="tabs__item" data-tab="#tab_2">Отзывы о товаре</a>
+                    <a class="tabs__item" data-tab="#tab_3">Написать отзыв</a>
                 </nav>
+
+
                 <div class="tabs__body">
 
                     <!--         Отзывы о сайте           -->
-                    <div id="tabs_01" class="tabs__block">
+                    <div id="tab_1" class="tabs__block">
 
                         <?foreach ( $feedback_site as $value): ?>
                             <div class="feedback" ><strong><?=$value['name']?></strong>: <?=$value['feedback']?></div>
@@ -21,7 +23,7 @@
                     </div>
 
                     <!--  Отзывы о товаре -->
-                    <div id="tabs_02" class="tabs__block">
+                    <div id="tab_2" class="tabs__block">
 
                             <?foreach ($feedback as $value): ?>
                                 <div class="feedback" ><strong><?=$value['name']?></strong>: <?=$value['feedback']?></div>
@@ -30,12 +32,12 @@
                     </div>
 
                     <!--  Написать отзыв          -->
-                    <div id="tabs_03" class="tabs__block">
+                    <div id="tab_3" class="tabs__block">
 
                         <div class="feedbackTabs">
 
-                            <form action="/feedback#tabs_03" method="post">
-                                <div>Оставьте отзыв:</div>
+                            <form action="/feedback" method="post">
+                                <div><h3>Оставьте отзыв:</h3></div>
 
                                 <div class="feedback__choose">
                                     <div>
@@ -74,6 +76,6 @@
         </div>
     </div>
 
-
+    <script src="scripts/tabs.js?<?php echo uniqid();?>"></script>
 </div>
 
