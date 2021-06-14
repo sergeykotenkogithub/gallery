@@ -700,3 +700,7 @@ select {
 	width: 220px;
 	margin: 35px 0;
 }
+
+.basket__title {
+	padding-bottom: 30px;
+}
