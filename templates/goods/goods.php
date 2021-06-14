@@ -15,12 +15,18 @@
                             <br>
                         </div>
                     </a>
-                    <button type="submit" class="buy">Купить</button>
+                    <!-- Купить через форму отправки                   -->
+                    <!-- <button type="submit" class="buy">Купить</button>-->
                 </form>
+                <button class="goodsBuy buy" data-id="<?=$item['id']?>" data-price="<?= $item['price'] ?>">Купить</button>
+
             </div>
         <? endforeach; ?>
-
     </div>
+
+    <!--  Скрипт для асинхроной отправки  -->
+    <script src="/scripts/Async/goods.js?<?php echo uniqid();?>"></script>
+
 </div>
 
 
